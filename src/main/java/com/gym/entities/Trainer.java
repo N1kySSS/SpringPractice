@@ -24,7 +24,7 @@ public class Trainer extends IdEntity {
 
     private Set<Contract> contracts;
 
-    public Trainer() {
+    private Trainer() {
     }
 
     public Trainer(String firstName, String lastName, String specialization, String phoneNumber, String workplace, int experience) {

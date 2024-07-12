@@ -21,7 +21,7 @@ public class Visitor extends IdEntity {
 
     private Set<TrainingSession> trainingSessions;
 
-    public Visitor() {
+    private Visitor() {
     }
 
     public Visitor(String firstName, String lastName, Date birthDate, String email) {

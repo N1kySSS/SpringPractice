@@ -17,7 +17,7 @@ public class Contract extends IdEntity {
 
     private Trainer trainer;
 
-    public Contract() {
+    private Contract() {
     }
 
     public Contract(Date contractDate, double salary, Set<Gym> gyms, Trainer trainer) {
@@ -46,7 +46,7 @@ public class Contract extends IdEntity {
     }
 
     @ManyToMany
-    @JoinTable(name = "contract_gym",
+    @JoinTable(name = "contract",
             joinColumns = @JoinColumn(name = "contract_id"),
             inverseJoinColumns = @JoinColumn(name = "gym_id"))
     public Set<Gym> getGyms() {

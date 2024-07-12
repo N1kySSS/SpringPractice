@@ -16,7 +16,7 @@ public class TrainingSession extends IdEntity {
 
     private Date trainingDate;
 
-    public TrainingSession() {
+    private TrainingSession() {
     }
 
     public TrainingSession(Visitor visitor, Trainer trainer, Date trainingTime, Date trainingDate) {

@@ -19,7 +19,7 @@ public class Subscription extends IdEntity {
 
     private Set<Gym> gyms;
 
-    public Subscription() {
+    private Subscription() {
     }
 
     public Subscription(String type, double cost, Date creationDate, Visitor visitor, Set<Gym> gyms) {
@@ -68,7 +68,7 @@ public class Subscription extends IdEntity {
     }
 
     @ManyToMany
-    @JoinTable(name = "subscription_gym",
+    @JoinTable(name = "subscription",
             joinColumns = @JoinColumn(name = "subscription_id"),
             inverseJoinColumns = @JoinColumn(name = "gym_id"))
     public Set<Gym> getGyms() {
