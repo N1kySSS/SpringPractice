@@ -90,7 +90,7 @@ public class Trainer extends IdEntity {
         this.experience = experience;
     }
 
-    @OneToMany(mappedBy = "trainer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "trainer", targetEntity = TrainingSession.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public Set<TrainingSession> getTrainingSessions() {
         return trainingSessions;
     }

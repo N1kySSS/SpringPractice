@@ -76,7 +76,7 @@ public class Visitor extends IdEntity {
         this.subscription = subscription;
     }
 
-    @OneToMany(mappedBy = "visitor", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "visitor", targetEntity = TrainingSession.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public Set<TrainingSession> getTrainingSessions() {
         return trainingSessions;
     }
