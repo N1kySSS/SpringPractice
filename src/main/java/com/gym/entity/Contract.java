@@ -1,4 +1,4 @@
-package com.gym.entities;
+package com.gym.entity;
 
 import jakarta.persistence.*;
 
@@ -10,11 +10,8 @@ import java.util.Set;
 public class Contract extends IdEntity {
 
     private Date contractDate;
-
     private double salary;
-
     private Set<Gym> gyms;
-
     private Trainer trainer;
 
     protected Contract() {
@@ -46,7 +43,7 @@ public class Contract extends IdEntity {
     }
 
     @ManyToMany
-    @JoinTable(name = "contract",
+    @JoinTable(name = "contract_gym",
             joinColumns = @JoinColumn(name = "contract_id"),
             inverseJoinColumns = @JoinColumn(name = "gym_id"))
     public Set<Gym> getGyms() {

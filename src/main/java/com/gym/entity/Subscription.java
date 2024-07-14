@@ -1,4 +1,4 @@
-package com.gym.entities;
+package com.gym.entity;
 
 import jakarta.persistence.*;
 
@@ -68,7 +68,7 @@ public class Subscription extends IdEntity {
     }
 
     @ManyToMany
-    @JoinTable(name = "subscription",
+    @JoinTable(name = "subscription_gym", // Новое имя таблицы
             joinColumns = @JoinColumn(name = "subscription_id"),
             inverseJoinColumns = @JoinColumn(name = "gym_id"))
     public Set<Gym> getGyms() {

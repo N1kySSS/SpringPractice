@@ -1,4 +1,4 @@
-package com.gym.entities;
+package com.gym.entity;
 
 import jakarta.persistence.*;
 
@@ -9,19 +9,12 @@ import java.util.Set;
 public class Trainer extends IdEntity {
 
     private String firstName;
-
     private String lastName;
-
     private String specialization;
-
     private String phoneNumber;
-
     private String workplace;
-
     private int experience;
-
     private Set<TrainingSession> trainingSessions;
-
     private Set<Contract> contracts;
 
     protected Trainer() {
@@ -99,8 +92,7 @@ public class Trainer extends IdEntity {
         this.trainingSessions = trainingSessions;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "contract_id")
+    @OneToMany(mappedBy = "trainer", targetEntity = Contract.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public Set<Contract> getContracts() {
         return contracts;
     }
