@@ -23,7 +23,7 @@ public class Gym extends IdEntity {
 
     private Set<Contract> contracts;
 
-    private Gym() {
+    protected Gym() {
     }
 
     public Gym(String name, String contactNumber, String location, String workingHours) {

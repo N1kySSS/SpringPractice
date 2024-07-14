@@ -19,7 +19,7 @@ public class Subscription extends IdEntity {
 
     private Set<Gym> gyms;
 
-    private Subscription() {
+    protected Subscription() {
     }
 
     public Subscription(String type, double cost, Date creationDate, Visitor visitor, Set<Gym> gyms) {

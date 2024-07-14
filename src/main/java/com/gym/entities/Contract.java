@@ -17,7 +17,7 @@ public class Contract extends IdEntity {
 
     private Trainer trainer;
 
-    private Contract() {
+    protected Contract() {
     }
 
     public Contract(Date contractDate, double salary, Set<Gym> gyms, Trainer trainer) {
