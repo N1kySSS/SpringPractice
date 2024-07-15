@@ -1,4 +1,7 @@
 package com.gym.service.impl;
 
-public class VisitorServiceImplementation {
+import com.gym.service.VisitorService;
+
+public class VisitorServiceImplementation extends BaseServiceImplementation implements VisitorService {
+
 }

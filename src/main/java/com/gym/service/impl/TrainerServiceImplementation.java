@@ -1,4 +1,7 @@
 package com.gym.service.impl;
 
-public class TrainerServiceImplementation {
+import com.gym.service.TrainerService;
+
+public class TrainerServiceImplementation extends BaseServiceImplementation implements TrainerService {
+
 }

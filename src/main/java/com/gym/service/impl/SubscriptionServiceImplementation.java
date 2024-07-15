@@ -1,4 +1,7 @@
 package com.gym.service.impl;
 
-public class SubscriptionServiceImplementation {
+import com.gym.service.SubscriptionService;
+
+public class SubscriptionServiceImplementation extends BaseServiceImplementation implements SubscriptionService {
+
 }

@@ -1,9 +1,9 @@
 package com.gym.repository;
 
 import com.gym.entity.Contract;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
-@Repository
-public interface ContractRepository extends JpaRepository<Contract, String> {
+@Component
+public interface ContractRepository {
+    Contract findByTrainerId(Long Id);
 }
