@@ -16,8 +16,6 @@ public class Trainer extends IdEntity {
 
     private String phoneNumber;
 
-    private String workplace;
-
     private int experience;
 
     private Set<TrainingSession> trainingSessions;
@@ -27,12 +25,11 @@ public class Trainer extends IdEntity {
     protected Trainer() {
     }
 
-    public Trainer(String firstName, String lastName, String specialization, String phoneNumber, String workplace, int experience) {
+    public Trainer(String firstName, String lastName, String specialization, String phoneNumber, int experience) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.specialization = specialization;
         this.phoneNumber = phoneNumber;
-        this.workplace = workplace;
         this.experience = experience;
     }
 
@@ -70,15 +67,6 @@ public class Trainer extends IdEntity {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    @Column(name = "workplace", nullable = false)
-    public String getWorkplace() {
-        return workplace;
-    }
-
-    public void setWorkplace(String workplace) {
-        this.workplace = workplace;
     }
 
     @Column(name = "experience", nullable = false)

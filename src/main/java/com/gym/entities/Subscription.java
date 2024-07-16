@@ -13,7 +13,7 @@ public class Subscription extends IdEntity {
 
     private double cost;
 
-    private Date creationDate;
+    private Date endDate;
 
     private Visitor visitor;
 
@@ -22,10 +22,10 @@ public class Subscription extends IdEntity {
     protected Subscription() {
     }
 
-    public Subscription(String type, double cost, Date creationDate, Visitor visitor, Set<Gym> gyms) {
+    public Subscription(String type, double cost, Date endDate, Visitor visitor, Set<Gym> gyms) {
         this.type = type;
         this.cost = cost;
-        this.creationDate = creationDate;
+        this.endDate = endDate;
         this.visitor = visitor;
         this.gyms = gyms;
     }
@@ -49,12 +49,12 @@ public class Subscription extends IdEntity {
     }
 
     @Column(name = "creation_date", nullable = false)
-    public Date getCreationDate() {
-        return creationDate;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     @OneToOne
