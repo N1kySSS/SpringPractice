@@ -3,7 +3,7 @@ package com.gym.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalTime;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Table(name = "training_session")
