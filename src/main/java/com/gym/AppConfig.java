@@ -2,6 +2,12 @@ package com.gym;
 
 import com.gym.repositories.*;
 import com.gym.repositories.impl.*;
+import com.gym.services.GymService;
+import com.gym.services.TrainerService;
+import com.gym.services.VisitorService;
+import com.gym.services.impl.GymServiceImplementation;
+import com.gym.services.impl.TrainerServiceImplementation;
+import com.gym.services.impl.VisitorServiceImplementation;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -45,5 +51,18 @@ public class AppConfig {
         return new VisitorRepositoryImplementation();
     }
 
-    //TODO(Добавить сервисы и их имплементации)
+    @Bean
+    public GymService gymService() {
+        return new GymServiceImplementation(gymRepository(), modelMapper());
+    }
+
+    @Bean
+    public TrainerService trainerService() {
+        return new TrainerServiceImplementation(trainerRepository(), contractRepository(), modelMapper());
+    }
+
+    @Bean
+    public VisitorService visitorService() {
+        return new VisitorServiceImplementation(visitorRepository(), subscriptionRepository(), trainingSessionRepository(), modelMapper());
+    }
 }

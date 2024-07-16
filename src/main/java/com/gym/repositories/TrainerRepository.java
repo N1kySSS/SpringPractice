@@ -15,5 +15,7 @@ public interface TrainerRepository {
 
     Trainer findAvailableTrainer(Long trainerId, LocalTime trainingTime, Date trainingDate);
 
+    Trainer findTrainerByPhoneNumber(String phoneNumber);
+
     void save(Trainer trainer);
 }

@@ -54,5 +54,17 @@ public class TrainerRepositoryImplementation extends BaseRepository<Trainer, Lon
         }
     }
 
+    @Override
+    public Trainer findTrainerByPhoneNumber(String phoneNumber) {
+        String jpql = "SELECT t FROM Trainer t WHERE t.phoneNumber = :phoneNumber";
+        TypedQuery<Trainer> query = entityManager.createQuery(jpql, Trainer.class);
+        query.setParameter("phoneNumber", phoneNumber);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            throw new EntityNotFoundException("Trainer with such phone number does not exist");
+        }
+    }
+
 
 }

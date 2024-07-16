@@ -5,9 +5,7 @@ import com.gym.repositories.SubscriptionRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public class SubscriptionRepositoryImplementation extends BaseRepository<Subscription, Long> implements SubscriptionRepository {
     @Override
     public Subscription findSubscriptionByType(String type) {

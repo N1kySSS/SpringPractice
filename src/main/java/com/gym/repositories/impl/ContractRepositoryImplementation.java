@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class ContractRepositoryImplementation extends BaseRepository<Contract, Long> implements ContractRepository {
-
     @Override
     public Contract findContractByTrainerId(Long trainerId) {
         String jpql = "SELECT c FROM Contract c WHERE c.trainer.id = :trainerId";
