@@ -2,6 +2,7 @@ package com.gym.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalTime;
 import java.util.Date;
 
 @Entity
@@ -12,14 +13,14 @@ public class TrainingSession extends IdEntity {
 
     private Trainer trainer;
 
-    private Date trainingTime;
+    private LocalTime trainingTime;
 
     private Date trainingDate;
 
     protected TrainingSession() {
     }
 
-    public TrainingSession(Visitor visitor, Trainer trainer, Date trainingTime, Date trainingDate) {
+    public TrainingSession(Visitor visitor, Trainer trainer, LocalTime trainingTime, Date trainingDate) {
         this.visitor = visitor;
         this.trainer = trainer;
         this.trainingTime = trainingTime;
@@ -47,11 +48,11 @@ public class TrainingSession extends IdEntity {
     }
 
     @Column(name = "training_time", nullable = false)
-    public Date getTrainingTime() {
+    public LocalTime getTrainingTime() {
         return trainingTime;
     }
 
-    public void setTrainingTime(Date trainingTime) {
+    public void setTrainingTime(LocalTime trainingTime) {
         this.trainingTime = trainingTime;
     }
 

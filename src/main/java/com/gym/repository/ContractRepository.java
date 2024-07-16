@@ -5,5 +5,5 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface ContractRepository {
-    Contract findByTrainerId(Long Id);
+    Contract findContractByTrainerId(Long Id);
 }

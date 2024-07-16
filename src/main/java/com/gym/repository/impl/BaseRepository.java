@@ -1,4 +1,4 @@
-package com.gym.repository;
+package com.gym.repository.impl;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
@@ -19,7 +19,7 @@ public abstract class BaseRepository<Entity, EntityID> {
     private Class<Entity> entityClass;
 
     @Transactional
-    public void save(Entity entity){
+    public void save(Entity entity) {
         repository.save(entity);
     }
 
@@ -31,7 +31,7 @@ public abstract class BaseRepository<Entity, EntityID> {
     }
 
     @Transactional
-    public void update(Entity entity){
+    public void update(Entity entity) {
         entityManager.merge(entity);
     }
 }

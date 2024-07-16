@@ -1,9 +1,9 @@
 package com.gym.repository;
 
 import com.gym.entity.Subscription;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
-@Repository
+@Component
 public interface SubscriptionRepository {
     Subscription findSubscriptionByType(String type);
 }

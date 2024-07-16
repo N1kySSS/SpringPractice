@@ -1,9 +1,11 @@
 package com.gym.repository;
 
 import com.gym.entity.Gym;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
-@Repository
+@Component
 public interface GymRepository {
-    Gym findByName(String name);
+    Gym findGymByName(String name);
+
+    void save(Gym gym);
 }

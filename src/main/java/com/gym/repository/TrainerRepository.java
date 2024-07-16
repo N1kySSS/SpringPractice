@@ -1,9 +1,19 @@
 package com.gym.repository;
 
 import com.gym.entity.Trainer;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
-@Repository
+import java.time.LocalTime;
+import java.util.Date;
+import java.util.List;
+
+@Component
 public interface TrainerRepository {
-    Trainer findBySpecialization(String specialization);
+    List<Trainer> findTrainersBySpecialization(String specialization);
+
+    List<Trainer> findTrainersByCriteria(int experience, String specialization);
+
+    Trainer findAvailableTrainer(Long trainerId, LocalTime trainingTime, Date trainingDate);
+
+    void save(Trainer trainer);
 }

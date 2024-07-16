@@ -1,9 +1,11 @@
 package com.gym.repository;
 
 import com.gym.entity.Visitor;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
-@Repository
+@Component
 public interface VisitorRepository {
     Visitor findByEmail(String email);
+
+    void save(Visitor visitor);
 }
