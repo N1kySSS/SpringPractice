@@ -1,7 +1,7 @@
 package com.gym;
 
-import com.gym.repository.*;
-import com.gym.repository.impl.*;
+import com.gym.repositories.*;
+import com.gym.repositories.impl.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
