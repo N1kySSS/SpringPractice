@@ -1,12 +1,13 @@
 package com.gym.services.impl;
 
+import com.gym.dtos.SubscriptionDTO;
+import com.gym.dtos.TrainingSessionDTO;
+import com.gym.dtos.VisitorDTO;
+import com.gym.entities.Visitor;
 import com.gym.repositories.SubscriptionRepository;
 import com.gym.repositories.TrainingSessionRepository;
 import com.gym.repositories.VisitorRepository;
 import com.gym.services.VisitorService;
-import com.gym.services.dtos.SubscriptionDTO;
-import com.gym.services.dtos.TrainingSessionDTO;
-import com.gym.services.dtos.VisitorDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,11 @@ public class VisitorServiceImplementation extends BaseServiceImplementation impl
     @Override
     @Transactional
     public void addNewVisitor(VisitorDTO visitorDTO) {
-
+        if (visitorRepository.findByEmail(visitorDTO.getEmail()) != null) {
+            Visitor visitor = modelMapper.map(visitorDTO, Visitor.class);
+        } else {
+            throw new IllegalArgumentException("Visitor with this email already exists, change email");
+        }
     }
 
     @Override

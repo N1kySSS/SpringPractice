@@ -17,7 +17,7 @@ public class GymRepositoryImplementation extends BaseRepository<Gym, Long> imple
         try {
             return query.getSingleResult();
         } catch (NoResultException e) {
-            throw new EntityNotFoundException("Gym with such name does not exist");
+            throw new EntityNotFoundException("Gym with this name does not exist");
         }
     }
 }

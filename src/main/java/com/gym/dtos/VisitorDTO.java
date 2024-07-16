@@ -1,4 +1,4 @@
-package com.gym.services.dtos;
+package com.gym.dtos;
 
 import com.gym.entities.Subscription;
 import com.gym.entities.TrainingSession;

@@ -1,5 +1,6 @@
 package com.gym.entities;
 
+import com.gym.entities.enums.SubscriptionType;
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -9,7 +10,7 @@ import java.util.Set;
 @Table(name = "subscription")
 public class Subscription extends IdEntity {
 
-    private String type;
+    private SubscriptionType type;
 
     private double cost;
 
@@ -22,7 +23,7 @@ public class Subscription extends IdEntity {
     protected Subscription() {
     }
 
-    public Subscription(String type, double cost, Date endDate, Visitor visitor, Set<Gym> gyms) {
+    public Subscription(SubscriptionType type, double cost, Date endDate, Visitor visitor, Set<Gym> gyms) {
         this.type = type;
         this.cost = cost;
         this.endDate = endDate;
@@ -31,11 +32,11 @@ public class Subscription extends IdEntity {
     }
 
     @Column(name = "type", nullable = false)
-    public String getType() {
+    public SubscriptionType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(SubscriptionType type) {
         this.type = type;
     }
 

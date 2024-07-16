@@ -17,7 +17,7 @@ public class ContractRepositoryImplementation extends BaseRepository<Contract, L
         try {
             return query.getSingleResult();
         } catch (NoResultException e) {
-            throw new EntityNotFoundException("Trainer with such trainerId does not have contract");
+            throw new EntityNotFoundException("Trainer with this trainerId does not have contract");
         }
     }
 }

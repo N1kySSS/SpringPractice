@@ -1,7 +1,7 @@
 package com.gym.services;
 
-import com.gym.services.dtos.ContractDTO;
-import com.gym.services.dtos.TrainerDTO;
+import com.gym.dtos.ContractDTO;
+import com.gym.dtos.TrainerDTO;
 
 public interface TrainerService {
     void addNewTrainer(TrainerDTO trainerDTO);

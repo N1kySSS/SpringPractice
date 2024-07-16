@@ -1,4 +1,4 @@
-package com.gym.services.dtos;
+package com.gym.dtos;
 
 public class GymDTO {
     private String name;

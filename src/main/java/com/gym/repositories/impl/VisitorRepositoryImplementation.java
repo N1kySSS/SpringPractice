@@ -17,7 +17,7 @@ public class VisitorRepositoryImplementation extends BaseRepository<Visitor, Lon
         try {
             return query.getSingleResult();
         } catch (NoResultException e) {
-            throw new EntityNotFoundException("Visitor with such email does not exist");
+            throw new EntityNotFoundException("Visitor with this email does not exist");
         }
     }
 }

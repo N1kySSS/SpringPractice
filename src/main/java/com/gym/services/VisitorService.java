@@ -1,8 +1,8 @@
 package com.gym.services;
 
-import com.gym.services.dtos.SubscriptionDTO;
-import com.gym.services.dtos.TrainingSessionDTO;
-import com.gym.services.dtos.VisitorDTO;
+import com.gym.dtos.SubscriptionDTO;
+import com.gym.dtos.TrainingSessionDTO;
+import com.gym.dtos.VisitorDTO;
 
 public interface VisitorService {
     void addNewVisitor(VisitorDTO visitorDTO);

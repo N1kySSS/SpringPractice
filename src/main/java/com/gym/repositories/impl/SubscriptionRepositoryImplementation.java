@@ -15,7 +15,7 @@ public class SubscriptionRepositoryImplementation extends BaseRepository<Subscri
         try {
             return query.getSingleResult();
         } catch (NoResultException e) {
-            throw new EntityNotFoundException("Subscription with such type does not exist");
+            throw new EntityNotFoundException("Subscription with this type does not exist");
         }
     }
 }

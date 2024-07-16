@@ -21,7 +21,7 @@ public class TrainerRepositoryImplementation extends BaseRepository<Trainer, Lon
         try {
             return query.getResultList();
         } catch (NoResultException e) {
-            throw new EntityNotFoundException("Trainer with such specialization does not exist");
+            throw new EntityNotFoundException("Trainer with such specialization does not exists");
         }
     }
 
@@ -34,7 +34,7 @@ public class TrainerRepositoryImplementation extends BaseRepository<Trainer, Lon
         try {
             return query.getResultList();
         } catch (NoResultException e) {
-            throw new EntityNotFoundException("Trainer with such specialization and experience does not exist");
+            throw new EntityNotFoundException("Trainer with this specialization and this experience does not exist");
         }
     }
 
@@ -62,7 +62,7 @@ public class TrainerRepositoryImplementation extends BaseRepository<Trainer, Lon
         try {
             return query.getSingleResult();
         } catch (NoResultException e) {
-            throw new EntityNotFoundException("Trainer with such phone number does not exist");
+            throw new EntityNotFoundException("Trainer with this phone number does not exist");
         }
     }
 

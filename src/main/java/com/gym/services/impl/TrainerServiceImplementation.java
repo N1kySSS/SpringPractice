@@ -1,10 +1,11 @@
 package com.gym.services.impl;
 
+import com.gym.dtos.ContractDTO;
+import com.gym.dtos.TrainerDTO;
+import com.gym.entities.Trainer;
 import com.gym.repositories.ContractRepository;
 import com.gym.repositories.TrainerRepository;
 import com.gym.services.TrainerService;
-import com.gym.services.dtos.ContractDTO;
-import com.gym.services.dtos.TrainerDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,11 @@ public class TrainerServiceImplementation extends BaseServiceImplementation impl
     @Override
     @Transactional
     public void addNewTrainer(TrainerDTO trainerDTO) {
-
+        if (trainerRepository.findTrainerByPhoneNumber(trainerDTO.getPhoneNumber()) != null) {
+            Trainer trainer = modelMapper.map(trainerDTO, Trainer.class);
+        } else {
+            throw new IllegalArgumentException("Trainer with this phone number already exists");
+        }
     }
 
     @Override

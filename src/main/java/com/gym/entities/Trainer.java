@@ -1,5 +1,6 @@
 package com.gym.entities;
 
+import com.gym.entities.enums.TrainerSpecialization;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -12,7 +13,7 @@ public class Trainer extends IdEntity {
 
     private String lastName;
 
-    private String specialization;
+    private TrainerSpecialization specialization;
 
     private String phoneNumber;
 
@@ -25,7 +26,7 @@ public class Trainer extends IdEntity {
     protected Trainer() {
     }
 
-    public Trainer(String firstName, String lastName, String specialization, String phoneNumber, int experience) {
+    public Trainer(String firstName, String lastName, TrainerSpecialization specialization, String phoneNumber, int experience) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.specialization = specialization;
@@ -52,11 +53,11 @@ public class Trainer extends IdEntity {
     }
 
     @Column(name = "specialization", nullable = false)
-    public String getSpecialization() {
+    public TrainerSpecialization getSpecialization() {
         return specialization;
     }
 
-    public void setSpecialization(String specialization) {
+    public void setSpecialization(TrainerSpecialization specialization) {
         this.specialization = specialization;
     }
 

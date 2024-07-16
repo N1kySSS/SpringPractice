@@ -22,7 +22,7 @@ public class TrainingSessionRepositoryImplementation extends BaseRepository<Trai
         try {
             return query.getResultList();
         } catch (NoResultException e) {
-            throw new EntityNotFoundException("TrainingSession with such id does not exist");
+            throw new EntityNotFoundException("TrainingSession with this id does not exist");
         }
     }
 
@@ -36,7 +36,7 @@ public class TrainingSessionRepositoryImplementation extends BaseRepository<Trai
         try {
             return query.getResultList();
         } catch (NoResultException e) {
-            throw new EntityNotFoundException("There is no training sessions in such time and date");
+            throw new EntityNotFoundException("There is no training sessions in this time and this date");
         }
     }
 }
