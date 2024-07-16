@@ -9,12 +9,19 @@ import java.util.Set;
 public class Trainer extends IdEntity {
 
     private String firstName;
+
     private String lastName;
+
     private String specialization;
+
     private String phoneNumber;
+
     private String workplace;
+
     private int experience;
+
     private Set<TrainingSession> trainingSessions;
+
     private Set<Contract> contracts;
 
     protected Trainer() {

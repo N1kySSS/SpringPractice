@@ -10,8 +10,11 @@ import java.util.Set;
 public class Contract extends IdEntity {
 
     private Date contractDate;
+
     private double salary;
+
     private Set<Gym> gyms;
+
     private Trainer trainer;
 
     protected Contract() {
