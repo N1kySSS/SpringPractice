@@ -29,9 +29,4 @@ public abstract class BaseRepository<Entity, EntityID> {
         return optionalEntity.orElseThrow(() ->
                 new EntityNotFoundException(entityClass.getSimpleName() + " with id " + id + " not found."));
     }
-
-    @Transactional
-    public void update(Entity entity) {
-        entityManager.merge(entity);
-    }
 }

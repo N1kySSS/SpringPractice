@@ -2,8 +2,6 @@ package com.gym.repositories.impl;
 
 import com.gym.entities.Trainer;
 import com.gym.repositories.TrainerRepository;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
@@ -18,11 +16,7 @@ public class TrainerRepositoryImplementation extends BaseRepository<Trainer, Lon
         String jpql = "SELECT t FROM Trainer t WHERE t.specialization = :specialization";
         TypedQuery<Trainer> query = entityManager.createQuery(jpql, Trainer.class);
         query.setParameter("specialization", specialization);
-        try {
-            return query.getResultList();
-        } catch (NoResultException e) {
-            throw new EntityNotFoundException("Trainer with such specialization does not exists");
-        }
+        return query.getResultList();
     }
 
     @Override
@@ -31,11 +25,7 @@ public class TrainerRepositoryImplementation extends BaseRepository<Trainer, Lon
         TypedQuery<Trainer> query = entityManager.createQuery(jpql, Trainer.class);
         query.setParameter("specialization", specialization);
         query.setParameter("experience", experience);
-        try {
-            return query.getResultList();
-        } catch (NoResultException e) {
-            throw new EntityNotFoundException("Trainer with this specialization and this experience does not exist");
-        }
+        return query.getResultList();
     }
 
     @Override
@@ -47,11 +37,7 @@ public class TrainerRepositoryImplementation extends BaseRepository<Trainer, Lon
         query.setParameter("trainerId", trainerId);
         query.setParameter("trainingTime", trainingTime);
         query.setParameter("trainingDate", trainingDate);
-        try {
-            return query.getSingleResult();
-        } catch (NoResultException e) {
-            throw new EntityNotFoundException("Trainer was not found");
-        }
+        return query.getSingleResult();
     }
 
     @Override
@@ -59,11 +45,7 @@ public class TrainerRepositoryImplementation extends BaseRepository<Trainer, Lon
         String jpql = "SELECT t FROM Trainer t WHERE t.phoneNumber = :phoneNumber";
         TypedQuery<Trainer> query = entityManager.createQuery(jpql, Trainer.class);
         query.setParameter("phoneNumber", phoneNumber);
-        try {
-            return query.getSingleResult();
-        } catch (NoResultException e) {
-            throw new EntityNotFoundException("Trainer with this phone number does not exist");
-        }
+        return query.getSingleResult();
     }
 
 

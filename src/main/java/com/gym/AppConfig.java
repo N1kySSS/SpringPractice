@@ -53,7 +53,7 @@ public class AppConfig {
 
     @Bean
     public GymService gymService() {
-        return new GymServiceImplementation(gymRepository(), modelMapper());
+        return new GymServiceImplementation(gymRepository());
     }
 
     @Bean

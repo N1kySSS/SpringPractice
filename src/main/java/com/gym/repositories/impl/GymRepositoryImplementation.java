@@ -2,8 +2,6 @@ package com.gym.repositories.impl;
 
 import com.gym.entities.Gym;
 import com.gym.repositories.GymRepository;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
@@ -14,10 +12,6 @@ public class GymRepositoryImplementation extends BaseRepository<Gym, Long> imple
         String jpql = "SELECT g FROM Gym g WHERE g.name = :name";
         TypedQuery<Gym> query = entityManager.createQuery(jpql, Gym.class);
         query.setParameter("name", name);
-        try {
-            return query.getSingleResult();
-        } catch (NoResultException e) {
-            throw new EntityNotFoundException("Gym with this name does not exist");
-        }
+        return query.getSingleResult();
     }
 }
