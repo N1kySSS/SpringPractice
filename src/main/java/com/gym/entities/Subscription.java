@@ -4,7 +4,7 @@ import com.gym.entities.enums.SubscriptionType;
 import jakarta.persistence.*;
 
 import java.sql.Date;
-import java.util.Set;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "subscription")
@@ -14,21 +14,21 @@ public class Subscription extends IdEntity {
 
     private double cost;
 
-    private Date endDate;
+    private LocalDate endDate;
 
     private Visitor visitor;
 
-    private Set<Gym> gyms;
+    private Gym gym;
 
     protected Subscription() {
     }
 
-    public Subscription(SubscriptionType type, double cost, Date endDate, Visitor visitor, Set<Gym> gyms) {
+    public Subscription(SubscriptionType type, double cost, LocalDate endDate, Visitor visitor, Gym gym) {
         this.type = type;
         this.cost = cost;
         this.endDate = endDate;
         this.visitor = visitor;
-        this.gyms = gyms;
+        this.gym = gym;
     }
 
     @Column(name = "type", nullable = false)
@@ -49,12 +49,12 @@ public class Subscription extends IdEntity {
         this.cost = cost;
     }
 
-    @Column(name = "creation_date", nullable = false)
-    public Date getEndDate() {
+    @Column(name = "end_date", nullable = false)
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
@@ -68,15 +68,13 @@ public class Subscription extends IdEntity {
         this.visitor = visitor;
     }
 
-    @ManyToMany
-    @JoinTable(name = "subscription_gym", // Новое имя таблицы
-            joinColumns = @JoinColumn(name = "subscription_id"),
-            inverseJoinColumns = @JoinColumn(name = "gym_id"))
-    public Set<Gym> getGyms() {
-        return gyms;
+    @ManyToOne
+    @JoinColumn(name = "gym_name", nullable = false)
+    public Gym getGym() {
+        return gym;
     }
 
-    public void setGyms(Set<Gym> gyms) {
-        this.gyms = gyms;
+    public void setGym(Gym gym) {
+        this.gym = gym;
     }
 }

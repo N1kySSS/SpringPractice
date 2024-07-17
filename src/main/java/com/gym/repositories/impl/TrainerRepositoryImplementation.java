@@ -1,6 +1,7 @@
 package com.gym.repositories.impl;
 
 import com.gym.entities.Trainer;
+import com.gym.entities.Visitor;
 import com.gym.repositories.TrainerRepository;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
@@ -37,7 +38,13 @@ public class TrainerRepositoryImplementation extends BaseRepository<Trainer, Lon
         query.setParameter("trainerId", trainerId);
         query.setParameter("trainingTime", trainingTime);
         query.setParameter("trainingDate", trainingDate);
-        return query.getSingleResult();
+        List<Trainer> resultList = query.getResultList();
+
+        if (resultList.isEmpty()) {
+            return null;
+        } else {
+            return resultList.getFirst();
+        }
     }
 
     @Override
@@ -45,8 +52,17 @@ public class TrainerRepositoryImplementation extends BaseRepository<Trainer, Lon
         String jpql = "SELECT t FROM Trainer t WHERE t.phoneNumber = :phoneNumber";
         TypedQuery<Trainer> query = entityManager.createQuery(jpql, Trainer.class);
         query.setParameter("phoneNumber", phoneNumber);
-        return query.getSingleResult();
+        List<Trainer> resultList = query.getResultList();
+
+        if (resultList.isEmpty()) {
+            return null;
+        } else {
+            return resultList.getFirst();
+        }
     }
 
-
+    @Override
+    public void update(Trainer trainer) {
+        entityManager.merge(trainer);
+    }
 }

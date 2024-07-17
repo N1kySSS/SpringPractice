@@ -58,11 +58,11 @@ public class AppConfig {
 
     @Bean
     public TrainerService trainerService() {
-        return new TrainerServiceImplementation(trainerRepository(), contractRepository(), modelMapper());
+        return new TrainerServiceImplementation(trainerRepository(), contractRepository(), gymRepository(), modelMapper());
     }
 
     @Bean
     public VisitorService visitorService() {
-        return new VisitorServiceImplementation(visitorRepository(), subscriptionRepository(), trainingSessionRepository(), modelMapper());
+        return new VisitorServiceImplementation(visitorRepository(), subscriptionRepository(), trainingSessionRepository(), gymRepository(), trainerRepository(), modelMapper());
     }
 }

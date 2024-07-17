@@ -10,13 +10,12 @@ public class VisitorDTO {
     private Long id;
     private String firstName;
     private String lastName;
-    private Date birthDate;
+    private String birthDate;
     private String email;
     private Subscription subscription;
     private Set<TrainingSession> trainingSessions;
-    private Date subscriptionEndDate;
 
-    public VisitorDTO(Long id, String firstName, String lastName, Date birthDate, String email, Subscription subscription, Set<TrainingSession> trainingSessions, Date subscriptionEndDate) {
+    public VisitorDTO(Long id, String firstName, String lastName, String birthDate, String email, Subscription subscription, Set<TrainingSession> trainingSessions) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -24,7 +23,6 @@ public class VisitorDTO {
         this.email = email;
         this.subscription = subscription;
         this.trainingSessions = trainingSessions;
-        this.subscriptionEndDate = subscriptionEndDate;
     }
 
     public String getFirstName() {
@@ -43,20 +41,12 @@ public class VisitorDTO {
         this.lastName = lastName;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getEmail() {
@@ -83,11 +73,11 @@ public class VisitorDTO {
         this.trainingSessions = trainingSessions;
     }
 
-    public Date getSubscriptionEndDate() {
-        return subscriptionEndDate;
+    public Long getId() {
+        return id;
     }
 
-    public void setSubscriptionEndDate(Date subscriptionEndDate) {
-        this.subscriptionEndDate = subscriptionEndDate;
+    public void setId(Long id) {
+        this.id = id;
     }
 }

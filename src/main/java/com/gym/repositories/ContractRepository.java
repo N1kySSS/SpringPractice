@@ -6,4 +6,6 @@ import org.springframework.stereotype.Component;
 @Component
 public interface ContractRepository {
     Contract findContractByTrainerId(Long Id);
+
+    void save(Contract contract);
 }

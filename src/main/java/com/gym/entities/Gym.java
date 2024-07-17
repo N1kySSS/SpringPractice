@@ -1,9 +1,6 @@
 package com.gym.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Set;
 
@@ -69,7 +66,7 @@ public class Gym extends IdEntity {
         this.workingHours = workingHours;
     }
 
-    @ManyToMany(mappedBy = "gyms")
+    @OneToMany(mappedBy = "gym", targetEntity = Subscription.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public Set<Subscription> getSubscriptions() {
         return subscriptions;
     }
@@ -78,7 +75,7 @@ public class Gym extends IdEntity {
         this.subscriptions = subscriptions;
     }
 
-    @ManyToMany(mappedBy = "gyms")
+    @OneToMany(mappedBy = "gym", targetEntity = Contract.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public Set<Contract> getContracts() {
         return contracts;
     }

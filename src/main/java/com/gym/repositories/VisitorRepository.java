@@ -7,5 +7,9 @@ import org.springframework.stereotype.Component;
 public interface VisitorRepository {
     Visitor findByEmail(String email);
 
+    Visitor findById(Long id);
+
     void save(Visitor visitor);
+
+    void update(Visitor visitor);
 }

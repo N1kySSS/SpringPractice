@@ -2,6 +2,7 @@ package com.gym.dtos;
 
 import com.gym.entities.Contract;
 import com.gym.entities.TrainingSession;
+import com.gym.entities.enums.TrainerSpecialization;
 
 import java.util.Set;
 
@@ -9,13 +10,13 @@ public class TrainerDTO {
     private Long id;
     private String firstName;
     private String lastName;
-    private String specialization;
+    private TrainerSpecialization specialization;
     private String phoneNumber;
     private int experience;
     private Set<TrainingSession> trainingSessions;
     private Set<Contract> contracts;
 
-    public TrainerDTO(Long id, String firstName, String lastName, String specialization, String phoneNumber, int experience, Set<TrainingSession> trainingSessions, Set<Contract> contracts) {
+    public TrainerDTO(Long id, String firstName, String lastName, TrainerSpecialization specialization, String phoneNumber, int experience, Set<TrainingSession> trainingSessions, Set<Contract> contracts) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -66,11 +67,11 @@ public class TrainerDTO {
         this.id = id;
     }
 
-    public String getSpecialization() {
+    public TrainerSpecialization getSpecialization() {
         return specialization;
     }
 
-    public void setSpecialization(String specialization) {
+    public void setSpecialization(TrainerSpecialization specialization) {
         this.specialization = specialization;
     }
 

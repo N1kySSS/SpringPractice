@@ -3,37 +3,37 @@ package com.gym.entities;
 import jakarta.persistence.*;
 
 import java.sql.Date;
-import java.util.Set;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "contract")
 public class Contract extends IdEntity {
 
-    private Date contractDate;
+    private LocalDate contractEndDate;
 
     private double salary;
 
-    private Set<Gym> gyms;
+    private Gym gym;
 
     private Trainer trainer;
 
     protected Contract() {
     }
 
-    public Contract(Date contractDate, double salary, Set<Gym> gyms, Trainer trainer) {
-        this.contractDate = contractDate;
+    public Contract(LocalDate contractEndDate, double salary, Gym gym, Trainer trainer) {
+        this.contractEndDate = contractEndDate;
         this.salary = salary;
-        this.gyms = gyms;
+        this.gym = gym;
         this.trainer = trainer;
     }
 
     @Column(name = "contract_date", nullable = false)
-    public Date getContractDate() {
-        return contractDate;
+    public LocalDate getContractEndDate() {
+        return contractEndDate;
     }
 
-    public void setContractDate(Date contractDate) {
-        this.contractDate = contractDate;
+    public void setContractEndDate(LocalDate contractEndDate) {
+        this.contractEndDate = contractEndDate;
     }
 
     @Column(name = "salary", nullable = false)
@@ -45,16 +45,14 @@ public class Contract extends IdEntity {
         this.salary = salary;
     }
 
-    @ManyToMany
-    @JoinTable(name = "contract_gym",
-            joinColumns = @JoinColumn(name = "contract_id"),
-            inverseJoinColumns = @JoinColumn(name = "gym_id"))
-    public Set<Gym> getGyms() {
-        return gyms;
+    @ManyToOne
+    @JoinColumn(name = "gym_name", nullable = false)
+    public Gym getGym() {
+        return gym;
     }
 
-    public void setGyms(Set<Gym> gyms) {
-        this.gyms = gyms;
+    public void setGym(Gym gym) {
+        this.gym = gym;
     }
 
     @ManyToOne

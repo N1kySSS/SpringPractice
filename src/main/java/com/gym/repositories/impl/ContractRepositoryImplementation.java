@@ -1,9 +1,12 @@
 package com.gym.repositories.impl;
 
 import com.gym.entities.Contract;
+import com.gym.entities.Visitor;
 import com.gym.repositories.ContractRepository;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class ContractRepositoryImplementation extends BaseRepository<Contract, Long> implements ContractRepository {
@@ -12,6 +15,12 @@ public class ContractRepositoryImplementation extends BaseRepository<Contract, L
         String jpql = "SELECT c FROM Contract c WHERE c.trainer.id = :trainerId";
         TypedQuery<Contract> query = entityManager.createQuery(jpql, Contract.class);
         query.setParameter("trainerId", trainerId);
-        return query.getSingleResult();
+        List<Contract> resultList = query.getResultList();
+
+        if (resultList.isEmpty()) {
+            return null;
+        } else {
+            return resultList.getFirst();
+        }
     }
 }
