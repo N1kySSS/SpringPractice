@@ -1,6 +1,5 @@
 package com.gym.services.impl;
 
-import com.gym.dtos.GymDTO;
 import com.gym.entities.Gym;
 import com.gym.repositories.GymRepository;
 import com.gym.services.GymService;
@@ -19,8 +18,8 @@ public class GymServiceImplementation extends BaseServiceImplementation implemen
 
     @Override
     @Transactional
-    public String getLocationOfTheGym(GymDTO gymDTO) {
-        Gym gym = gymRepository.findGymByName(gymDTO.getName());
+    public String getLocationOfTheGym(String gymName) {
+        Gym gym = gymRepository.findGymByName(gymName);
         if (gym != null) {
             return gym.getLocation();
         } else {
@@ -30,12 +29,13 @@ public class GymServiceImplementation extends BaseServiceImplementation implemen
 
     @Override
     @Transactional
-    public String getWorkingHoursOfTheGym(GymDTO gymDTO) {
-        Gym gym = gymRepository.findGymByName(gymDTO.getName());
+    public String getWorkingHoursOfTheGym(String gymName) {
+        Gym gym = gymRepository.findGymByName(gymName);
         if (gym != null) {
             return gym.getWorkingHours();
         } else {
             throw new IllegalArgumentException("Gym with this name does not exist");
+
         }
     }
 }

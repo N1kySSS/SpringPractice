@@ -3,12 +3,12 @@ package com.gym.repositories.impl;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.metamodel.EntityType;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 
 @Repository
 public abstract class BaseRepository<EntityType, EntityPrimaryKeyType> {
@@ -25,8 +25,17 @@ public abstract class BaseRepository<EntityType, EntityPrimaryKeyType> {
     }
 
     @Transactional
-    public EntityType findById(EntityPrimaryKeyType id) {
-        Optional<EntityType> optionalEntity = genericRepository.findById(id);
-        return optionalEntity.orElse(null);
+    public EntityType findById(Class<EntityType> entityTypeClass, Long id) {
+        String jpql = "SELECT e FROM " + entityTypeClass.getSimpleName() +
+                " e WHERE e.id = :id";
+        TypedQuery<EntityType> query = entityManager.createQuery(jpql, entityTypeClass)
+                .setParameter("id", id);
+
+        List<EntityType> results = query.getResultList();
+        if (results.isEmpty()) {
+            throw new EntityNotFoundException(entityTypeClass.getSimpleName() + " with id " + id + " not found");
+        } else {
+            return results.get(0);
+        }
     }
 }

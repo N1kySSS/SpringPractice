@@ -1,20 +1,18 @@
 package com.gym.dtos;
 
-import com.gym.entities.Trainer;
-
 import java.time.LocalDate;
 
 public class ContractDTO {
     private Long id;
-    private Trainer trainer;
+    private Long trainerId;
     private String gymName;
     private double salary;
     private LocalDate contractEndDate;
 
-    public ContractDTO(Long id, String gymName, Trainer trainer, double salary, LocalDate contractEndDate) {
+    public ContractDTO(Long id, String gymName, Long trainerId, double salary, LocalDate contractEndDate) {
         this.id = id;
         this.gymName = gymName;
-        this.trainer = trainer;
+        this.trainerId = trainerId;
         this.salary = salary;
         this.contractEndDate = contractEndDate;
     }
@@ -27,12 +25,12 @@ public class ContractDTO {
         this.id = id;
     }
 
-    public Trainer getTrainer() {
-        return trainer;
+    public Long getTrainerId() {
+        return trainerId;
     }
 
-    public void setTrainer(Trainer trainer) {
-        this.trainer = trainer;
+    public void setTrainerId(Long trainerId) {
+        this.trainerId = trainerId;
     }
 
     public String getGymName() {

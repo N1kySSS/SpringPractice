@@ -6,5 +6,5 @@ import com.gym.dtos.TrainerDTO;
 
 public interface TrainerService {
     void addNewTrainer(TrainerDTO trainerDTO);
-    void createContract(TrainerDTO trainerDTO, ContractDTO contractDTO, GymDTO gymDTO);
+    void createContract(Long trainerDTO, ContractDTO contractDTO);
 }

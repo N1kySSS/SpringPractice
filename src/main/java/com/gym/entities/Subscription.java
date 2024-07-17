@@ -69,7 +69,7 @@ public class Subscription extends IdEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "gym_name", nullable = false)
+    @JoinColumn(name = "gym_id", nullable = false)
     public Gym getGym() {
         return gym;
     }

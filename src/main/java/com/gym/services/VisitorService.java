@@ -4,6 +4,6 @@ import com.gym.dtos.*;
 
 public interface VisitorService {
     void addNewVisitor(VisitorDTO visitorDTO);
-    void buySubscription(VisitorDTO visitorDTO, SubscriptionDTO subscriptionDTO);
-    void signUpForAWorkout(VisitorDTO visitorDTO, TrainingSessionDTO trainingSessionDTO);//
+    void buySubscription(Long visitorId, String gymName, SubscriptionDTO subscriptionDTO);
+    void signUpForAWorkout(TrainingSessionDTO trainingSessionDTO);//
 }

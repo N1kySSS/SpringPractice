@@ -5,7 +5,6 @@ import com.gym.dtos.GymDTO;
 import com.gym.dtos.TrainerDTO;
 import com.gym.entities.Contract;
 import com.gym.entities.Trainer;
-import com.gym.entities.TrainingSession;
 import com.gym.repositories.ContractRepository;
 import com.gym.repositories.GymRepository;
 import com.gym.repositories.TrainerRepository;
@@ -38,15 +37,15 @@ public class TrainerServiceImplementation extends BaseServiceImplementation impl
     public void addNewTrainer(TrainerDTO trainerDTO) {
         if (trainerRepository.findTrainerByPhoneNumber(trainerDTO.getPhoneNumber()) != null) {
             throw new IllegalArgumentException("Trainer with this phone number already exists");
-            //TODO(спросить про enum)
         }
 
         Trainer trainer = modelMapper.map(trainerDTO, Trainer.class);
         trainerRepository.save(trainer);
+
     }
 
     @Override
-    public void createContract(TrainerDTO trainerDTO, ContractDTO contractDTO, GymDTO gymDTO) {
+    public void createContract(Long trainerId, ContractDTO contractDTO) {
         if (trainerRepository.findById(contractDTO.getId()) == null) {
             throw new IllegalArgumentException("Trainer with this id does not exist");
         }
@@ -55,9 +54,9 @@ public class TrainerServiceImplementation extends BaseServiceImplementation impl
             throw new IllegalArgumentException("Gym with this name does not exist");
         }
 
-        if (contractRepository.findContractByTrainerId(trainerDTO.getId()) != null &&
-                contractRepository.findContractByTrainerId(trainerDTO.getId()).getGym().getName().equals(contractDTO.getGymName()) &&
-                contractRepository.findContractByTrainerId(trainerDTO.getId()).getContractEndDate().isBefore(LocalDate.now())) {
+        if (contractRepository.findContractByTrainerId(trainerId) != null &&
+                contractRepository.findContractByTrainerId(trainerId).getGym().getName().equals(contractDTO.getGymName()) &&
+                contractRepository.findContractByTrainerId(trainerId).getContractEndDate().isBefore(LocalDate.now())) {
             throw new IllegalArgumentException("Trainer already has contract in this gym");
         }
 
@@ -65,7 +64,7 @@ public class TrainerServiceImplementation extends BaseServiceImplementation impl
         contractRepository.save(contract);
 
         Set<Contract> contracts = Set.of(contract);
-        Trainer trainer = trainerRepository.findById(contractDTO.getTrainer().getId());
+        Trainer trainer = trainerRepository.findById(contractDTO.getTrainerId());
         trainer.setContracts(contracts);
     }
 }

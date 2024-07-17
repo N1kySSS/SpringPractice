@@ -24,6 +24,11 @@ public class VisitorRepositoryImplementation extends BaseRepository<Visitor, Lon
     }
 
     @Override
+    public Visitor findById(Long id) {
+        return super.findById(Visitor.class, id);
+    }
+
+    @Override
     public void update(Visitor visitor) {
         entityManager.merge(visitor);
     }

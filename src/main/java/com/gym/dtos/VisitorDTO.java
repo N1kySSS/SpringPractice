@@ -3,23 +3,23 @@ package com.gym.dtos;
 import com.gym.entities.Subscription;
 import com.gym.entities.TrainingSession;
 
-import java.sql.Date;
 import java.util.Set;
 
 public class VisitorDTO {
     private Long id;
     private String firstName;
     private String lastName;
-    private String birthDate;
     private String email;
     private Subscription subscription;
     private Set<TrainingSession> trainingSessions;
 
-    public VisitorDTO(Long id, String firstName, String lastName, String birthDate, String email, Subscription subscription, Set<TrainingSession> trainingSessions) {
+    protected VisitorDTO(){
+    }
+
+    public VisitorDTO(Long id, String firstName, String lastName, String email, Subscription subscription, Set<TrainingSession> trainingSessions) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.birthDate = birthDate;
         this.email = email;
         this.subscription = subscription;
         this.trainingSessions = trainingSessions;
@@ -39,14 +39,6 @@ public class VisitorDTO {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
     }
 
     public String getEmail() {

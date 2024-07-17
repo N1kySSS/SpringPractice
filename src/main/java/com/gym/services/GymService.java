@@ -3,6 +3,6 @@ package com.gym.services;
 import com.gym.dtos.GymDTO;
 
 public interface GymService {
-    String getLocationOfTheGym(GymDTO gymDTO);
-    String getWorkingHoursOfTheGym(GymDTO gymDTO);
+    String getLocationOfTheGym(String gymName);
+    String getWorkingHoursOfTheGym(String gymName);
 }

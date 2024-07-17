@@ -1,42 +1,41 @@
 package com.gym.dtos;
 
-import com.gym.entities.Trainer;
-import com.gym.entities.Visitor;
+import com.gym.entities.enums.TrainerSpecialization;
 
 import java.sql.Date;
 import java.time.LocalTime;
 
 public class TrainingSessionDTO {
-    private Visitor visitor;
-    private Trainer trainer;
+    private Long visitorId;
+    private Long trainerId;
     private LocalTime trainingTime;
     private Date trainingDate;
-    private String specialization;
+    private TrainerSpecialization specialization;
     private int experience;
 
-    public TrainingSessionDTO(Visitor visitor, Trainer trainer, LocalTime trainingTime, Date trainingDate, String specialization, int experience) {
-        this.visitor = visitor;
-        this.trainer = trainer;
+    public TrainingSessionDTO(Long visitorId, Long trainerId, LocalTime trainingTime, Date trainingDate, TrainerSpecialization specialization, int experience) {
+        this.visitorId = visitorId;
+        this.trainerId = trainerId;
         this.trainingTime = trainingTime;
         this.trainingDate = trainingDate;
         this.specialization = specialization;
         this.experience = experience;
     }
 
-    public Visitor getVisitor() {
-        return visitor;
+    public Long getVisitorId() {
+        return visitorId;
     }
 
-    public void setVisitor(Visitor visitor) {
-        this.visitor = visitor;
+    public void setVisitorId(Long visitorId) {
+        this.visitorId = visitorId;
     }
 
-    public Trainer getTrainer() {
-        return trainer;
+    public Long getTrainerId() {
+        return trainerId;
     }
 
-    public void setTrainer(Trainer trainer) {
-        this.trainer = trainer;
+    public void setTrainerId(Long trainerId) {
+        this.trainerId = trainerId;
     }
 
     public LocalTime getTrainingTime() {
@@ -55,11 +54,11 @@ public class TrainingSessionDTO {
         this.trainingDate = trainingDate;
     }
 
-    public String getSpecialization() {
+    public TrainerSpecialization getSpecialization() {
         return specialization;
     }
 
-    public void setSpecialization(String specialization) {
+    public void setSpecialization(TrainerSpecialization specialization) {
         this.specialization = specialization;
     }
 

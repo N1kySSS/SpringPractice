@@ -13,8 +13,6 @@ public class Visitor extends IdEntity {
 
     private String lastName;
 
-    private Date birthDate;
-
     private String email;
 
     private Subscription subscription;
@@ -24,10 +22,9 @@ public class Visitor extends IdEntity {
     protected Visitor() {
     }
 
-    public Visitor(String firstName, String lastName, Date birthDate, String email) {
+    public Visitor(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.birthDate = birthDate;
         this.email = email;
     }
 
@@ -47,15 +44,6 @@ public class Visitor extends IdEntity {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    @Column(name = "birth_date", nullable = false)
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
     }
 
     @Column(name = "email", nullable = false)

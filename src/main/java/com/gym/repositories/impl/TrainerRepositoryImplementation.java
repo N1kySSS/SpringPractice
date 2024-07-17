@@ -1,7 +1,7 @@
 package com.gym.repositories.impl;
 
 import com.gym.entities.Trainer;
-import com.gym.entities.Visitor;
+import com.gym.entities.enums.TrainerSpecialization;
 import com.gym.repositories.TrainerRepository;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
@@ -13,18 +13,18 @@ import java.util.List;
 @Repository
 public class TrainerRepositoryImplementation extends BaseRepository<Trainer, Long> implements TrainerRepository {
     @Override
-    public List<Trainer> findTrainersBySpecialization(String specialization) {
+    public List<Trainer> findTrainersBySpecialization(TrainerSpecialization specialization) {
         String jpql = "SELECT t FROM Trainer t WHERE t.specialization = :specialization";
         TypedQuery<Trainer> query = entityManager.createQuery(jpql, Trainer.class);
-        query.setParameter("specialization", specialization);
+        query.setParameter("specialization", specialization.getId());
         return query.getResultList();
     }
 
     @Override
-    public List<Trainer> findTrainersByCriteria(int experience, String specialization) {
+    public List<Trainer> findTrainersByCriteria(int experience, TrainerSpecialization specialization) {
         String jpql = "SELECT t FROM Trainer t WHERE t.experience >= :experience AND t.specialization = :specialization";
         TypedQuery<Trainer> query = entityManager.createQuery(jpql, Trainer.class);
-        query.setParameter("specialization", specialization);
+        query.setParameter("specialization", specialization.getId());
         query.setParameter("experience", experience);
         return query.getResultList();
     }
@@ -59,6 +59,11 @@ public class TrainerRepositoryImplementation extends BaseRepository<Trainer, Lon
         } else {
             return resultList.getFirst();
         }
+    }
+
+    @Override
+    public Trainer findById(Long id) {
+        return super.findById(Trainer.class, id);
     }
 
     @Override

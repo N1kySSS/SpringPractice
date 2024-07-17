@@ -1,10 +1,7 @@
 package com.gym.dtos;
 
-import com.gym.entities.Gym;
-import com.gym.entities.Visitor;
 import com.gym.entities.enums.SubscriptionType;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 public class SubscriptionDTO {
@@ -13,17 +10,17 @@ public class SubscriptionDTO {
     private String periodInMonth;
     private LocalDate endDate;
     private double cost;
-    private Visitor visitor;
-    private Gym gym;
+    private Long visitorId;
+    private Long gymId;
 
-    public SubscriptionDTO(Long id, SubscriptionType type, String periodInMonth, LocalDate endDate, double cost, Visitor visitor, Gym gym) {
+    public SubscriptionDTO(Long id, SubscriptionType type, String periodInMonth, LocalDate endDate, double cost, Long visitorId, Long gymId) {
         this.id = id;
         this.type = type;
         this.periodInMonth = periodInMonth;
         this.endDate = endDate;
         this.cost = cost;
-        this.visitor = visitor;
-        this.gym = gym;
+        this.visitorId = visitorId;
+        this.gymId = gymId;
     }
 
     public SubscriptionType getType() {
@@ -42,20 +39,20 @@ public class SubscriptionDTO {
         this.endDate = endDate;
     }
 
-    public Visitor getVisitor() {
-        return visitor;
+    public Long getVisitorId() {
+        return visitorId;
     }
 
-    public void setVisitor(Visitor visitor) {
-        this.visitor = visitor;
+    public void setVisitorId(Long visitorId) {
+        this.visitorId = visitorId;
     }
 
-    public Gym getGym() {
-        return gym;
+    public Long getGymId() {
+        return gymId;
     }
 
-    public void setGym(Gym gym) {
-        this.gym = gym;
+    public void setGymId(Long gymId) {
+        this.gymId = gymId;
     }
 
     public String getPeriodInMonth() {

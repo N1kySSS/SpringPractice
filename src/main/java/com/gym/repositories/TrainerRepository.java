@@ -2,6 +2,7 @@ package com.gym.repositories;
 
 import com.gym.entities.Trainer;
 import com.gym.entities.Visitor;
+import com.gym.entities.enums.TrainerSpecialization;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalTime;
@@ -10,9 +11,9 @@ import java.util.List;
 
 @Component
 public interface TrainerRepository {
-    List<Trainer> findTrainersBySpecialization(String specialization);
+    List<Trainer> findTrainersBySpecialization(TrainerSpecialization  specialization);
 
-    List<Trainer> findTrainersByCriteria(int experience, String specialization);
+    List<Trainer> findTrainersByCriteria(int experience, TrainerSpecialization  specialization);
 
     Trainer findAvailableTrainer(Long trainerId, LocalTime trainingTime, Date trainingDate);
 
