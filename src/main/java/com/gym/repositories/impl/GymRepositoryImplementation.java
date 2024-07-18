@@ -1,7 +1,6 @@
 package com.gym.repositories.impl;
 
 import com.gym.entities.Gym;
-import com.gym.entities.Visitor;
 import com.gym.repositories.GymRepository;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;

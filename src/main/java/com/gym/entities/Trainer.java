@@ -3,6 +3,7 @@ package com.gym.entities;
 import com.gym.entities.enums.TrainerSpecialization;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -19,7 +20,7 @@ public class Trainer extends IdEntity {
 
     private int experience;
 
-    private Set<TrainingSession> trainingSessions;
+    private Set<TrainingSession> trainingSessions = new HashSet<>();
 
     private Set<Contract> contracts;
 
@@ -86,6 +87,16 @@ public class Trainer extends IdEntity {
 
     public void setTrainingSessions(Set<TrainingSession> trainingSessions) {
         this.trainingSessions = trainingSessions;
+    }
+
+    public void addTrainingSession(TrainingSession session) {
+        trainingSessions.add(session);
+        session.setTrainer(this);
+    }
+
+    public void removeTrainingSession(TrainingSession session) {
+        trainingSessions.remove(session);
+        session.setTrainer(null);
     }
 
     @OneToMany(mappedBy = "trainer", targetEntity = Contract.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)

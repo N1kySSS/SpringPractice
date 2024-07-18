@@ -2,8 +2,8 @@ package com.gym.entities;
 
 import jakarta.persistence.*;
 
-import java.time.LocalTime;
 import java.sql.Date;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "training_session")

@@ -3,7 +3,6 @@ package com.gym.entities;
 import com.gym.entities.enums.SubscriptionType;
 import jakarta.persistence.*;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 @Entity

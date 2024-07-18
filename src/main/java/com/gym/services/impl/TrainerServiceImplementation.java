@@ -1,7 +1,6 @@
 package com.gym.services.impl;
 
 import com.gym.dtos.ContractDTO;
-import com.gym.dtos.GymDTO;
 import com.gym.dtos.TrainerDTO;
 import com.gym.entities.Contract;
 import com.gym.entities.Gym;

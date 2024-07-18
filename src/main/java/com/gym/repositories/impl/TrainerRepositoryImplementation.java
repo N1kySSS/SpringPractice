@@ -13,28 +13,23 @@ import java.util.List;
 
 @Repository
 public class TrainerRepositoryImplementation extends BaseRepository<Trainer, Long> implements TrainerRepository {
-    @Override
-    public List<Trainer> findTrainersBySpecialization(TrainerSpecialization specialization) {
-        String jpql = "SELECT t FROM Trainer t WHERE t.specialization = :specialization";
-        TypedQuery<Trainer> query = entityManager.createQuery(jpql, Trainer.class);
-        query.setParameter("specialization", specialization.getId());
-        return query.getResultList();
-    }
 
     @Override
     public List<Trainer> findTrainersByCriteria(int experience, TrainerSpecialization specialization) {
         String jpql = "SELECT t FROM Trainer t WHERE t.experience >= :experience AND t.specialization = :specialization";
         TypedQuery<Trainer> query = entityManager.createQuery(jpql, Trainer.class);
-        query.setParameter("specialization", specialization.getId());
+        query.setParameter("specialization", specialization);
         query.setParameter("experience", experience);
         return query.getResultList();
     }
 
     @Override
     public Trainer findAvailableTrainer(Long trainerId, LocalTime trainingTime, Date trainingDate) {
-        String jpql = "SELECT t FROM Trainer t JOIN t.trainingSessions ts WHERE t.id = :trainerId " +
-                "AND ts.trainingTime != :trainingTime " +
-                "AND ts.trainingDate != :trainingDate";
+        String jpql = "SELECT t " +
+                "FROM Trainer t " +
+                "LEFT JOIN t.trainingSessions ts " +
+                "WHERE t.id = :trainerId " +
+                "AND (ts IS NULL OR (ts.trainingTime != :trainingTime AND ts.trainingDate != :trainingDate))";
         TypedQuery<Trainer> query = entityManager.createQuery(jpql, Trainer.class);
         query.setParameter("trainerId", trainerId);
         query.setParameter("trainingTime", trainingTime);

@@ -1,6 +1,8 @@
 package com.gym.services.impl;
 
-import com.gym.dtos.*;
+import com.gym.dtos.SubscriptionDTO;
+import com.gym.dtos.TrainingSessionDTO;
+import com.gym.dtos.VisitorDTO;
 import com.gym.entities.*;
 import com.gym.entities.enums.SubscriptionType;
 import com.gym.repositories.*;
@@ -115,7 +117,7 @@ public class VisitorServiceImplementation extends BaseServiceImplementation impl
     @Override
     @Transactional
     public void signUpForAWorkout(TrainingSessionDTO trainingSessionDTO) {
-        if ((trainingSessionDTO.getExperience() != 0) && (trainerRepository.findTrainersByCriteria(trainingSessionDTO.getExperience(), trainingSessionDTO.getSpecialization()).getFirst() == null)) {
+        if (trainerRepository.findTrainersByCriteria(trainingSessionDTO.getExperience(), trainingSessionDTO.getSpecialization()).getFirst() == null) {
             throw new IllegalArgumentException("Trainer with this specialization and this experience does not exist");
         } else {
             Trainer trainer = trainerRepository.findTrainersByCriteria(trainingSessionDTO.getExperience(), trainingSessionDTO.getSpecialization()).getFirst();
@@ -126,48 +128,22 @@ public class VisitorServiceImplementation extends BaseServiceImplementation impl
             String visitorsGym = visitorRepository.findById(trainingSessionDTO.getVisitorId()).getSubscription().getGym().getName();
             if (findGym(visitorsGym, trainingSessionDTO)) {
                 trainingSessionDTO.setTrainerId(trainer.getId());
-                TrainingSession trainingSession = modelMapper.map(trainingSessionDTO, TrainingSession.class);
+                TrainingSession trainingSession = new TrainingSession(visitorRepository.findById(trainingSessionDTO.getVisitorId()),
+                        trainerRepository.findById(trainingSessionDTO.getTrainerId()),
+                        trainingSessionDTO.getTrainingTime(),
+                        trainingSessionDTO.getTrainingDate());
                 trainingSessionRepository.save(trainingSession);
 
-                Set<TrainingSession> trainingSessions = Set.of(trainingSession);
-
+                visitorRepository.findById(trainingSessionDTO.getVisitorId()).addTrainingSession(trainingSession);
                 Visitor visitor = visitorRepository.findById(trainingSession.getVisitor().getId());
-                visitor.setTrainingSessions(trainingSessions);
                 visitorRepository.update(visitor);
 
-                trainer.setTrainingSessions(trainingSessions);
+                trainer.addTrainingSession(trainingSession);
                 trainerRepository.update(trainer);
             } else {
                 throw new IllegalArgumentException("Trainer does not work in your gym");
             }
 
-        }
-
-        if (trainerRepository.findTrainersBySpecialization(trainingSessionDTO.getSpecialization()).getFirst() == null) {
-            throw new IllegalArgumentException("Trainer with this specialization does not exist");
-        } else {
-            Trainer trainer = trainerRepository.findTrainersByCriteria(trainingSessionDTO.getExperience(), trainingSessionDTO.getSpecialization()).getFirst();
-            if (trainerRepository.findAvailableTrainer(trainer.getId(), trainingSessionDTO.getTrainingTime(), trainingSessionDTO.getTrainingDate()) == null) {
-                throw new IllegalArgumentException("Trainer is busy at this time");
-            }
-
-            String visitorsGym = visitorRepository.findById(trainingSessionDTO.getVisitorId()).getSubscription().getGym().getName();
-            if (findGym(visitorsGym, trainingSessionDTO)) {
-                trainingSessionDTO.setTrainerId(trainer.getId());
-                TrainingSession trainingSession = modelMapper.map(trainingSessionDTO, TrainingSession.class);
-                trainingSessionRepository.save(trainingSession);
-
-                Set<TrainingSession> trainingSessions = Set.of(trainingSession);
-
-                Visitor visitor = visitorRepository.findById(trainingSession.getVisitor().getId());
-                visitor.setTrainingSessions(trainingSessions);
-                visitorRepository.update(visitor);
-
-                trainer.setTrainingSessions(trainingSessions);
-                trainerRepository.update(trainer);
-            } else {
-                throw new IllegalArgumentException("Trainer does not work in your gym");
-            }
         }
     }
 

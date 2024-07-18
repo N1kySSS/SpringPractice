@@ -13,7 +13,7 @@ public class VisitorDTO {
     private Subscription subscription;
     private Set<TrainingSession> trainingSessions;
 
-    protected VisitorDTO(){
+    protected VisitorDTO() {
     }
 
     public VisitorDTO(Long id, String firstName, String lastName, String email, Subscription subscription, Set<TrainingSession> trainingSessions) {

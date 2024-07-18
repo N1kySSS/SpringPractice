@@ -8,12 +8,12 @@ public enum SubscriptionType {
     private final String title;
     private final int costMonth;
 
-    SubscriptionType(String title, int costMonth){
+    SubscriptionType(String title, int costMonth) {
         this.title = title;
         this.costMonth = costMonth;
     }
 
-    private String getTitle(){
+    private String getTitle() {
         return title;
     }
 

@@ -10,12 +10,12 @@ public enum TrainerSpecialization {
     private final String title;
     private final int id;
 
-    TrainerSpecialization(String title, int id){
+    TrainerSpecialization(String title, int id) {
         this.title = title;
         this.id = id;
     }
 
-    public String getTitle(){
+    public String getTitle() {
         return title;
     }
 

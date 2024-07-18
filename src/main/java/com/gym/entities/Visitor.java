@@ -2,7 +2,7 @@ package com.gym.entities;
 
 import jakarta.persistence.*;
 
-import java.sql.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -17,7 +17,7 @@ public class Visitor extends IdEntity {
 
     private Subscription subscription;
 
-    private Set<TrainingSession> trainingSessions;
+    private Set<TrainingSession> trainingSessions = new HashSet<>();
 
     protected Visitor() {
     }
@@ -71,5 +71,15 @@ public class Visitor extends IdEntity {
 
     public void setTrainingSessions(Set<TrainingSession> trainingSessions) {
         this.trainingSessions = trainingSessions;
+    }
+
+    public void addTrainingSession(TrainingSession session) {
+        trainingSessions.add(session);
+        session.setVisitor(this);
+    }
+
+    public void removeTrainingSession(TrainingSession session) {
+        trainingSessions.remove(session);
+        session.setVisitor(null);
     }
 }

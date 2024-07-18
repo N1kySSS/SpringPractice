@@ -1,7 +1,6 @@
 package com.gym.repositories.impl;
 
 import com.gym.entities.Contract;
-import com.gym.entities.Visitor;
 import com.gym.repositories.ContractRepository;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;

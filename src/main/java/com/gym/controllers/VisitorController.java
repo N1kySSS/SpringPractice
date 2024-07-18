@@ -18,7 +18,7 @@ public class VisitorController {
     }
 
     @PostMapping("/addVisitor")
-    public void addNewVisitor(@RequestBody VisitorDTO visitorDTO){
+    public void addNewVisitor(@RequestBody VisitorDTO visitorDTO) {
         visitorService.addNewVisitor(visitorDTO);
     }
 
