@@ -27,7 +27,7 @@ public class Contract extends IdEntity {
         this.trainer = trainer;
     }
 
-    @Column(name = "end_date", nullable = false)
+    @Column(name = "contract_date", nullable = false)
     public LocalDate getContractEndDate() {
         return contractEndDate;
     }

@@ -4,6 +4,7 @@ import com.gym.entities.Trainer;
 import com.gym.entities.enums.TrainerSpecialization;
 import com.gym.repositories.TrainerRepository;
 import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalTime;
@@ -62,11 +63,13 @@ public class TrainerRepositoryImplementation extends BaseRepository<Trainer, Lon
     }
 
     @Override
+    @Transactional
     public Trainer findById(Long id) {
         return super.findById(Trainer.class, id);
     }
 
     @Override
+    @Transactional
     public void update(Trainer trainer) {
         entityManager.merge(trainer);
     }

@@ -4,6 +4,7 @@ import com.gym.entities.Visitor;
 import com.gym.repositories.VisitorRepository;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,11 +25,13 @@ public class VisitorRepositoryImplementation extends BaseRepository<Visitor, Lon
     }
 
     @Override
+    @Transactional
     public Visitor findById(Long id) {
         return super.findById(Visitor.class, id);
     }
 
     @Override
+    @Transactional
     public void update(Visitor visitor) {
         entityManager.merge(visitor);
     }

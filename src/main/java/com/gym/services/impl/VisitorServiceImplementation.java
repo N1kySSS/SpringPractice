@@ -151,7 +151,6 @@ public class VisitorServiceImplementation extends BaseServiceImplementation impl
                 throw new IllegalArgumentException("Trainer is busy at this time");
             }
 
-
             String visitorsGym = visitorRepository.findById(trainingSessionDTO.getVisitorId()).getSubscription().getGym().getName();
             if (findGym(visitorsGym, trainingSessionDTO)) {
                 trainingSessionDTO.setTrainerId(trainer.getId());

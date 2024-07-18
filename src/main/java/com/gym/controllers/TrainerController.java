@@ -22,7 +22,7 @@ public class TrainerController {
     }
 
     @PostMapping("/createContract")
-    public void createContract(@RequestParam Long trainerDTO, @RequestBody ContractDTO contractDTO) {
-        trainerService.createContract(trainerDTO, contractDTO);
+    public void createContract(@RequestBody ContractDTO contractDTO) {
+        trainerService.createContract(contractDTO);
     }
 }
