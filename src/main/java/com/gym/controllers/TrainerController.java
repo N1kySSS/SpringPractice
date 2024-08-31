@@ -6,11 +6,9 @@ import com.gym.services.TrainerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/trainers")
 public class TrainerController {
     private final TrainerService trainerService;
 
@@ -19,12 +17,12 @@ public class TrainerController {
         this.trainerService = trainerService;
     }
 
-    @PostMapping("/addNewTrainer")
+    @PostMapping("/trainers/addNewTrainer")
     public void addNewTrainer(@RequestBody TrainerDTO trainerDTO) {
         trainerService.addNewTrainer(trainerDTO);
     }
 
-    @PostMapping("/createContract")
+    @PostMapping("/trainers/createContract")
     public void createContract(@RequestBody ContractDTO contractDTO) {
         trainerService.createContract(contractDTO);
     }

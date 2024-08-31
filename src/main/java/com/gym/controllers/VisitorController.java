@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/visitors")
 public class VisitorController {
     private final VisitorService visitorService;
 
@@ -17,17 +16,17 @@ public class VisitorController {
         this.visitorService = visitorService;
     }
 
-    @PostMapping("/addVisitor")
+    @PostMapping("/visitors/addVisitor")
     public void addNewVisitor(@RequestBody VisitorDTO visitorDTO) {
         visitorService.addNewVisitor(visitorDTO);
     }
 
-    @PostMapping("/buySubscription")
+    @PostMapping("/visitors/buySubscription")
     public void buySubscription(@RequestParam Long visitorId, @RequestParam String gymName, @RequestBody SubscriptionDTO subscriptionDTO) {
         visitorService.buySubscription(visitorId, gymName, subscriptionDTO);
     }
 
-    @PostMapping("/signUpForAWorkout")
+    @PostMapping("/visitors/signUpForAWorkout")
     public void signUpForAWorkout(@RequestBody TrainingSessionDTO trainingSessionDTO) {
         visitorService.signUpForAWorkout(trainingSessionDTO);
     }

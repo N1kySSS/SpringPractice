@@ -3,12 +3,10 @@ package com.gym.controllers;
 import com.gym.services.GymService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/gyms")
 public class GymController {
     private final GymService gymService;
 
@@ -17,12 +15,12 @@ public class GymController {
         this.gymService = gymService;
     }
 
-    @GetMapping("/location")
+    @GetMapping("/gyms/location")
     public String getLocationOfTheGym(@RequestParam String gymName) {
         return gymService.getLocationOfTheGym(gymName);
     }
 
-    @GetMapping("/workingHours")
+    @GetMapping("/gyms/workingHours")
     public String getWorkingHoursOfTheGym(@RequestParam String gymName) {
         return gymService.getWorkingHoursOfTheGym(gymName);
     }
