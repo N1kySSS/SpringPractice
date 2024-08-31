@@ -5,7 +5,6 @@ import com.gym.repositories.GymRepository;
 import com.gym.services.GymService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class GymServiceImplementation extends BaseServiceImplementation implements GymService {
@@ -17,7 +16,6 @@ public class GymServiceImplementation extends BaseServiceImplementation implemen
     }
 
     @Override
-    @Transactional
     public String getLocationOfTheGym(String gymName) {
         Gym gym = gymRepository.findGymByName(gymName);
         if (gym != null) {
@@ -28,7 +26,6 @@ public class GymServiceImplementation extends BaseServiceImplementation implemen
     }
 
     @Override
-    @Transactional
     public String getWorkingHoursOfTheGym(String gymName) {
         Gym gym = gymRepository.findGymByName(gymName);
         if (gym != null) {

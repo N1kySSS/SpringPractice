@@ -36,7 +36,6 @@ public class VisitorServiceImplementation extends BaseServiceImplementation impl
 
 
     @Override
-    @Transactional
     public void addNewVisitor(VisitorDTO visitorDTO) {
         if (visitorRepository.findByEmail(visitorDTO.getEmail()) != null) {
             throw new IllegalArgumentException("Visitor with this email already exists, change email");
@@ -47,7 +46,6 @@ public class VisitorServiceImplementation extends BaseServiceImplementation impl
     }
 
     @Override
-    @Transactional
     public void buySubscription(Long visitorId, String gymName, SubscriptionDTO subscriptionDTO) {
         float premiumPrice3Month = 0.9f;
         float premiumPrice6Month = 0.8f;
@@ -115,7 +113,6 @@ public class VisitorServiceImplementation extends BaseServiceImplementation impl
     }
 
     @Override
-    @Transactional
     public void signUpForAWorkout(TrainingSessionDTO trainingSessionDTO) {
         if (trainerRepository.findTrainersByCriteria(trainingSessionDTO.getExperience(), trainingSessionDTO.getSpecialization()).getFirst() == null) {
             throw new IllegalArgumentException("Trainer with this specialization and this experience does not exist");
