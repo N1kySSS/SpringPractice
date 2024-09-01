@@ -19,13 +19,13 @@ public class Visitor extends IdEntity {
 
     private Set<TrainingSession> trainingSessions = new HashSet<>();
 
-    protected Visitor() {
-    }
-
     public Visitor(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+    }
+
+    protected Visitor() {
     }
 
     @Column(name = "first_name", nullable = false)

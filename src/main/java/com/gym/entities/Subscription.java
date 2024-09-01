@@ -19,15 +19,15 @@ public class Subscription extends IdEntity {
 
     private Gym gym;
 
-    protected Subscription() {
-    }
-
     public Subscription(SubscriptionType type, double cost, LocalDate endDate, Visitor visitor, Gym gym) {
         this.type = type;
         this.cost = cost;
         this.endDate = endDate;
         this.visitor = visitor;
         this.gym = gym;
+    }
+
+    protected Subscription() {
     }
 
     @Column(name = "type", nullable = false)

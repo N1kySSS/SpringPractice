@@ -24,15 +24,15 @@ public class Trainer extends IdEntity {
 
     private Set<Contract> contracts;
 
-    protected Trainer() {
-    }
-
     public Trainer(String firstName, String lastName, TrainerSpecialization specialization, String phoneNumber, int experience) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.specialization = specialization;
         this.phoneNumber = phoneNumber;
         this.experience = experience;
+    }
+
+    protected Trainer() {
     }
 
     @Column(name = "first_name", nullable = false)

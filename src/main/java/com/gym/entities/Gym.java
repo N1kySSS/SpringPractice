@@ -20,14 +20,14 @@ public class Gym extends IdEntity {
 
     private Set<Contract> contracts;
 
-    protected Gym() {
-    }
-
     public Gym(String name, String contactNumber, String location, String workingHours) {
         this.name = name;
         this.contactNumber = contactNumber;
         this.location = location;
         this.workingHours = workingHours;
+    }
+
+    protected Gym() {
     }
 
     @Column(name = "name", nullable = false, unique = true)

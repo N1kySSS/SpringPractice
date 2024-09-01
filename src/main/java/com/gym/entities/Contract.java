@@ -16,14 +16,14 @@ public class Contract extends IdEntity {
 
     private Trainer trainer;
 
-    protected Contract() {
-    }
-
     public Contract(LocalDate contractEndDate, double salary, Gym gym, Trainer trainer) {
         this.contractEndDate = contractEndDate;
         this.salary = salary;
         this.gym = gym;
         this.trainer = trainer;
+    }
+
+    protected Contract() {
     }
 
     @Column(name = "contract_date", nullable = false)

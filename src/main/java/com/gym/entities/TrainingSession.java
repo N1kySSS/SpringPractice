@@ -17,14 +17,14 @@ public class TrainingSession extends IdEntity {
 
     private Date trainingDate;
 
-    protected TrainingSession() {
-    }
-
     public TrainingSession(Visitor visitor, Trainer trainer, LocalTime trainingTime, Date trainingDate) {
         this.visitor = visitor;
         this.trainer = trainer;
         this.trainingTime = trainingTime;
         this.trainingDate = trainingDate;
+    }
+
+    protected TrainingSession() {
     }
 
     @ManyToOne
