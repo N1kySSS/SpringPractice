@@ -3,9 +3,7 @@ package com.gym.repositories.impl;
 import com.gym.entities.Trainer;
 import com.gym.entities.enums.TrainerSpecialization;
 import com.gym.repositories.TrainerRepository;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.TypedQuery;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalTime;
@@ -73,7 +71,6 @@ public class TrainerRepositoryImplementationImplementation extends BaseRepositor
     }
 
     @Override
-    @Transactional
     public void update(Trainer trainer) {
         entityManager.merge(trainer);
     }

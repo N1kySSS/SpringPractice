@@ -2,10 +2,8 @@ package com.gym.repositories.impl;
 
 import com.gym.entities.Visitor;
 import com.gym.repositories.VisitorRepository;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -40,7 +38,6 @@ public class VisitorRepositoryImplementationImplementation extends BaseRepositor
     }
 
     @Override
-    @Transactional
     public void update(Visitor visitor) {
         entityManager.merge(visitor);
     }
