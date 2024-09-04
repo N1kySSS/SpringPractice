@@ -2,6 +2,7 @@ package com.gym.repositories.impl;
 
 import com.gym.entities.Visitor;
 import com.gym.repositories.VisitorRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,9 +26,17 @@ public class VisitorRepositoryImplementationImplementation extends BaseRepositor
     }
 
     @Override
-    @Transactional
     public Visitor findById(Long id) {
-        return super.findById(Visitor.class, id);
+        String jpql = "SELECT e FROM Visitor e WHERE e.id = :id";
+        TypedQuery<Visitor> query = entityManager.createQuery(jpql, Visitor.class)
+                .setParameter("id", id);
+
+        List<Visitor> results = query.getResultList();
+        if (results.isEmpty()) {
+            return null;
+        } else {
+            return results.getFirst();
+        }
     }
 
     @Override

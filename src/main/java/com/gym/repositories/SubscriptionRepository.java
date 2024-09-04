@@ -5,7 +5,5 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface SubscriptionRepository {
-    Subscription findSubscriptionByType(String type);
-
     void save(Subscription subscription);
 }

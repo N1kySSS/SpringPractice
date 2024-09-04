@@ -3,6 +3,7 @@ package com.gym.repositories.impl;
 import com.gym.entities.Trainer;
 import com.gym.entities.enums.TrainerSpecialization;
 import com.gym.repositories.TrainerRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
@@ -58,9 +59,17 @@ public class TrainerRepositoryImplementationImplementation extends BaseRepositor
     }
 
     @Override
-    @Transactional
     public Trainer findById(Long id) {
-        return super.findById(Trainer.class, id);
+        String jpql = "SELECT e FROM Trainer e WHERE e.id = :id";
+        TypedQuery<Trainer> query = entityManager.createQuery(jpql, Trainer.class)
+                .setParameter("id", id);
+
+        List<Trainer> results = query.getResultList();
+        if (results.isEmpty()) {
+            return null;
+        } else {
+            return results.getFirst();
+        }
     }
 
     @Override
