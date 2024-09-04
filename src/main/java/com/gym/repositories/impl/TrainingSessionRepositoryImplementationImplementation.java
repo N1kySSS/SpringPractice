@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public class TrainingSessionRepositoryImplementation extends BaseRepository<TrainingSession, Long> implements TrainingSessionRepository {
+public class TrainingSessionRepositoryImplementationImplementation extends BaseRepositoryImplementation<TrainingSession, Long> implements TrainingSessionRepository {
 
     @Override
     public List<TrainingSession> getAllTrainingSessionByVisitorId(Long Id) {

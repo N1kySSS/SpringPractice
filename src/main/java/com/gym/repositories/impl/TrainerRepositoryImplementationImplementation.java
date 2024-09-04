@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public class TrainerRepositoryImplementation extends BaseRepository<Trainer, Long> implements TrainerRepository {
+public class TrainerRepositoryImplementationImplementation extends BaseRepositoryImplementation<Trainer, Long> implements TrainerRepository {
 
     @Override
     public List<Trainer> findTrainersByCriteria(int experience, TrainerSpecialization specialization) {

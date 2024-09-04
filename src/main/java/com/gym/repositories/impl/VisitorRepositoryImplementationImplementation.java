@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public class VisitorRepositoryImplementation extends BaseRepository<Visitor, Long> implements VisitorRepository {
+public class VisitorRepositoryImplementationImplementation extends BaseRepositoryImplementation<Visitor, Long> implements VisitorRepository {
     @Override
     public Visitor findByEmail(String email) {
         String jpql = "SELECT v FROM Visitor v WHERE v.email = :email";

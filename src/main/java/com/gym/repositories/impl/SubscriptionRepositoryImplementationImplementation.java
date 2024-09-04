@@ -4,7 +4,7 @@ import com.gym.entities.Subscription;
 import com.gym.repositories.SubscriptionRepository;
 import jakarta.persistence.TypedQuery;
 
-public class SubscriptionRepositoryImplementation extends BaseRepository<Subscription, Long> implements SubscriptionRepository {
+public class SubscriptionRepositoryImplementationImplementation extends BaseRepositoryImplementation<Subscription, Long> implements SubscriptionRepository {
     @Override
     public Subscription findSubscriptionByType(String type) {
         String jpql = "SELECT s FROM Subscription s WHERE s.type = :type";
