@@ -18,7 +18,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-public class TrainerServiceImplementation extends BaseServiceImplementation implements TrainerService {
+public class TrainerServiceImplementation implements TrainerService {
     private final TrainerRepository trainerRepository;
     private final ContractRepository contractRepository;
     private final GymRepository gymRepository;

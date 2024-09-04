@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GymServiceImplementation extends BaseServiceImplementation implements GymService {
+public class GymServiceImplementation implements GymService {
     private final GymRepository gymRepository;
 
     @Autowired

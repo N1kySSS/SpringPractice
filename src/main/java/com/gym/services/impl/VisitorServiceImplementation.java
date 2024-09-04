@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.util.Set;
 
 @Service
-public class VisitorServiceImplementation extends BaseServiceImplementation implements VisitorService {
+public class VisitorServiceImplementation implements VisitorService {
     private final VisitorRepository visitorRepository;
     private final SubscriptionRepository subscriptionRepository;
     private final TrainingSessionRepository trainingSessionRepository;
