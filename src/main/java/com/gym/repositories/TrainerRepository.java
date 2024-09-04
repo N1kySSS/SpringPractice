@@ -2,13 +2,11 @@ package com.gym.repositories;
 
 import com.gym.entities.Trainer;
 import com.gym.entities.enums.TrainerSpecialization;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
-@Component
 public interface TrainerRepository {
     List<Trainer> findTrainersByCriteria(int experience, TrainerSpecialization specialization);
 
