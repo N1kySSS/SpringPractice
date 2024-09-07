@@ -4,15 +4,13 @@ import com.gym.entities.Trainer;
 import com.gym.entities.enums.TrainerSpecialization;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
-@Repository
 public interface BaseTrainerRepository extends BaseRepository<Trainer> {
-    @Query("SELECT t FROM Trainer t WHERE t.experience = :experience AND t.specialization = :specialization")
+    @Query("SELECT t FROM Trainer t WHERE t.experience >= :experience AND t.specialization = :specialization")
     List<Trainer> findTrainersByCriteria(
             @Param(value = "experience") int experience,
             @Param(value = "specialization") TrainerSpecialization specialization);

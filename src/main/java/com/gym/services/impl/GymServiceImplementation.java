@@ -17,7 +17,7 @@ public class GymServiceImplementation implements GymService {
 
     @Override
     public String getLocationOfTheGym(String gymName) {
-        Gym gym = gymRepository.findGymByName(gymName);//TODO(проверить работу. Возможно заменить на Optional<Gym>)
+        Gym gym = gymRepository.findGymByName(gymName);
         if (gym != null) {
             return gym.getLocation();
         } else {
@@ -31,7 +31,7 @@ public class GymServiceImplementation implements GymService {
         if (gym != null) {
             return gym.getWorkingHours();
         } else {
-            throw new IllegalArgumentException("Gym with this name does not exist");//TODO(проверить работу. Возможно заменить на Optional<Gym>)
+            throw new IllegalArgumentException("Gym with this name does not exist");
 
         }
     }

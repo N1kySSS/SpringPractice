@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -109,18 +110,27 @@ public class VisitorServiceImplementation implements VisitorService {
         Subscription subscription = modelMapper.map(subscriptionDTO, Subscription.class);
         subscriptionRepository.add(subscription);
 
-        visitor.setSubscription(subscription);//TODO(проверить работу)
+        visitor.setSubscription(subscription);
         visitorRepository.update(visitor);
     }
 
     @Override
-    public void signUpForAWorkout(TrainingSessionDTO trainingSessionDTO) { //TODO(пересмотреть логику работы)
-        Trainer trainer = trainerRepository.findTrainersByCriteria(trainingSessionDTO.getExperience(), trainingSessionDTO.getSpecialization()).getFirst();//TODO(проверить работу)
+    public void signUpForAWorkout(TrainingSessionDTO trainingSessionDTO) {
+        boolean flag = false;
+        Trainer potentialTrainer = null;
+        List<Trainer> trainers = trainerRepository.findTrainersByCriteria(trainingSessionDTO.getExperience(), trainingSessionDTO.getSpecialization());
 
-        if (trainer == null) {
+        if (trainers.isEmpty()) {
             throw new IllegalArgumentException("Trainer with this specialization and this experience does not exist");
-        } else if (trainerRepository.findAvailableTrainer(trainer.getId(), trainingSessionDTO.getTrainingTime(), trainingSessionDTO.getTrainingDate()) == null) {
-            throw new IllegalArgumentException("Trainer is busy at this time");
+        } else {
+            for(Trainer trainer : trainers) {
+                potentialTrainer = trainerRepository.findAvailableTrainer(trainer.getId(), trainingSessionDTO.getTrainingTime(), trainingSessionDTO.getTrainingDate());
+                if (potentialTrainer != null) {
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag) throw new IllegalArgumentException("Trainer is busy at this time");
         }
 
         Optional<Visitor> visitorOp = visitorRepository.findById(trainingSessionDTO.getVisitorId());
@@ -132,10 +142,10 @@ public class VisitorServiceImplementation implements VisitorService {
         Visitor visitor = visitorOp.get();
 
         String visitorsGym = visitor.getSubscription().getGym().getName();
-        if (findGym(visitorsGym, trainer, trainingSessionDTO)) {
-            trainingSessionDTO.setTrainerId(trainer.getId());
+        if (findGym(visitorsGym, potentialTrainer, trainingSessionDTO)) {
+            trainingSessionDTO.setTrainerId(potentialTrainer.getId());
             TrainingSession trainingSession = new TrainingSession(visitor,
-                    trainer,
+                    potentialTrainer,
                     trainingSessionDTO.getTrainingTime(),
                     trainingSessionDTO.getTrainingDate());
             trainingSessionRepository.add(trainingSession);
@@ -143,8 +153,8 @@ public class VisitorServiceImplementation implements VisitorService {
             visitor.addTrainingSession(trainingSession);
             visitorRepository.update(visitor);
 
-            trainer.addTrainingSession(trainingSession);
-            trainerRepository.update(trainer);
+            potentialTrainer.addTrainingSession(trainingSession);
+            trainerRepository.update(potentialTrainer);
         } else {
             throw new IllegalArgumentException("Trainer does not work in your gym");
         }
