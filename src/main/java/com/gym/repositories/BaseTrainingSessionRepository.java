@@ -4,7 +4,5 @@ import com.gym.entities.TrainingSession;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TrainingSessionRepository {
-
-    void add(TrainingSession trainingSession);
+public interface BaseTrainingSessionRepository extends BaseRepository<TrainingSession>{
 }

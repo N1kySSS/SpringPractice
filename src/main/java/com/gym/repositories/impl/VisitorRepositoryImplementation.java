@@ -1,38 +1,33 @@
 package com.gym.repositories.impl;
 
 import com.gym.entities.Visitor;
+import com.gym.repositories.BaseVisitorRepository;
 import com.gym.repositories.VisitorRepository;
-import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.Optional;
 
 @Repository
-public class VisitorRepositoryImplementation extends BaseRepository<Visitor, Long> implements VisitorRepository {
+public class VisitorRepositoryImplementation extends DefaultRepository<BaseVisitorRepository> implements VisitorRepository {
+
     @Override
     public Visitor findByEmail(String email) {
-        String jpql = "SELECT v FROM Visitor v WHERE v.email = :email";
-        TypedQuery<Visitor> query = entityManager.createQuery(jpql, Visitor.class);
-        query.setParameter("email", email);
-        List<Visitor> resultList = query.getResultList();
+        return defaultRepository.findByEmail(email);
 
-        if (resultList.isEmpty()) {
-            return null;
-        } else {
-            return resultList.getFirst();
-        }
     }
 
     @Override
-    @Transactional
-    public Visitor findById(Long id) {
-        return super.findById(Visitor.class, id);
+    public Optional<Visitor> findById(Long id) {
+        return defaultRepository.findById(id);
     }
 
     @Override
-    @Transactional
     public void update(Visitor visitor) {
-        entityManager.merge(visitor);
+        defaultRepository.save(visitor);
+    }
+
+    @Override
+    public void add(Visitor visitor) {
+        defaultRepository.save(visitor);
     }
 }

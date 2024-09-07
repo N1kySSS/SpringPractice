@@ -1,15 +1,13 @@
 package com.gym.repositories.impl;
 
 import com.gym.entities.Subscription;
+import com.gym.repositories.BaseSubscriptionRepository;
 import com.gym.repositories.SubscriptionRepository;
-import jakarta.persistence.TypedQuery;
 
-public class SubscriptionRepositoryImplementation extends BaseRepository<Subscription, Long> implements SubscriptionRepository {
+public class SubscriptionRepositoryImplementation extends DefaultRepository<BaseSubscriptionRepository> implements SubscriptionRepository {
+
     @Override
-    public Subscription findSubscriptionByType(String type) {
-        String jpql = "SELECT s FROM Subscription s WHERE s.type = :type";
-        TypedQuery<Subscription> query = entityManager.createQuery(jpql, Subscription.class);
-        query.setParameter("type", type);
-        return query.getSingleResult();
+    public void add(Subscription subscription) {
+        defaultRepository.save(subscription);
     }
 }

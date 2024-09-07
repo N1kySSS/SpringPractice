@@ -10,13 +10,13 @@ import com.gym.services.VisitorService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
-public class VisitorServiceImplementation extends BaseServiceImplementation implements VisitorService {
+public class VisitorServiceImplementation implements VisitorService {
     private final VisitorRepository visitorRepository;
     private final SubscriptionRepository subscriptionRepository;
     private final TrainingSessionRepository trainingSessionRepository;
@@ -42,7 +42,7 @@ public class VisitorServiceImplementation extends BaseServiceImplementation impl
         }
 
         Visitor visitor = modelMapper.map(visitorDTO, Visitor.class);
-        visitorRepository.save(visitor);
+        visitorRepository.add(visitor);
     }
 
     @Override
@@ -53,13 +53,17 @@ public class VisitorServiceImplementation extends BaseServiceImplementation impl
         float groupPrice3Month = 0.95f;
         float groupPrice6Month = 0.9f;
         float groupPrice12Month = 0.85f;
-        float cost = 0;
+        float cost;
 
-        if (visitorRepository.findById(visitorId) == null) {
+        Optional<Visitor> visitorOp = visitorRepository.findById(visitorId);
+
+        if (visitorOp.isEmpty()) {
             throw new IllegalArgumentException("Visitor with this id does not exist");
         }
 
-        if (visitorRepository.findById(visitorId).getSubscription() != null) {
+        Visitor visitor = visitorOp.get();
+
+        if (visitor.getSubscription() != null) {
             throw new IllegalArgumentException("Visitor already has subscription");
         }
 
@@ -88,9 +92,7 @@ public class VisitorServiceImplementation extends BaseServiceImplementation impl
                     cost = SubscriptionType.GROUP.getCostMonth();
                 }
             }
-            case BASIC -> {
-                cost = SubscriptionType.BASIC.getCostMonth();
-            }
+            case BASIC -> cost = SubscriptionType.BASIC.getCostMonth();
             default -> throw new IllegalArgumentException("There is no subscription with this type");
         }
 
@@ -105,47 +107,51 @@ public class VisitorServiceImplementation extends BaseServiceImplementation impl
         subscriptionDTO.setVisitorId(visitorId);
         subscriptionDTO.setGymId(gymRepository.findGymByName(gymName).getId());
         Subscription subscription = modelMapper.map(subscriptionDTO, Subscription.class);
-        subscriptionRepository.save(subscription);
+        subscriptionRepository.add(subscription);
 
-        Visitor visitor = visitorRepository.findById(subscriptionDTO.getVisitorId());
-        visitor.setSubscription(subscription);
+        visitor.setSubscription(subscription);//TODO(проверить работу)
         visitorRepository.update(visitor);
     }
 
     @Override
-    public void signUpForAWorkout(TrainingSessionDTO trainingSessionDTO) {
-        if (trainerRepository.findTrainersByCriteria(trainingSessionDTO.getExperience(), trainingSessionDTO.getSpecialization()).getFirst() == null) {
+    public void signUpForAWorkout(TrainingSessionDTO trainingSessionDTO) { //TODO(пересмотреть логику работы)
+        Trainer trainer = trainerRepository.findTrainersByCriteria(trainingSessionDTO.getExperience(), trainingSessionDTO.getSpecialization()).getFirst();//TODO(проверить работу)
+
+        if (trainer == null) {
             throw new IllegalArgumentException("Trainer with this specialization and this experience does not exist");
+        } else if (trainerRepository.findAvailableTrainer(trainer.getId(), trainingSessionDTO.getTrainingTime(), trainingSessionDTO.getTrainingDate()) == null) {
+            throw new IllegalArgumentException("Trainer is busy at this time");
+        }
+
+        Optional<Visitor> visitorOp = visitorRepository.findById(trainingSessionDTO.getVisitorId());
+
+        if (visitorOp.isEmpty()) {
+            throw new IllegalArgumentException("Visitor with this id does not exist");
+        }
+
+        Visitor visitor = visitorOp.get();
+
+        String visitorsGym = visitor.getSubscription().getGym().getName();
+        if (findGym(visitorsGym, trainer, trainingSessionDTO)) {
+            trainingSessionDTO.setTrainerId(trainer.getId());
+            TrainingSession trainingSession = new TrainingSession(visitor,
+                    trainer,
+                    trainingSessionDTO.getTrainingTime(),
+                    trainingSessionDTO.getTrainingDate());
+            trainingSessionRepository.add(trainingSession);
+
+            visitor.addTrainingSession(trainingSession);
+            visitorRepository.update(visitor);
+
+            trainer.addTrainingSession(trainingSession);
+            trainerRepository.update(trainer);
         } else {
-            Trainer trainer = trainerRepository.findTrainersByCriteria(trainingSessionDTO.getExperience(), trainingSessionDTO.getSpecialization()).getFirst();
-            if (trainerRepository.findAvailableTrainer(trainer.getId(), trainingSessionDTO.getTrainingTime(), trainingSessionDTO.getTrainingDate()) == null) {
-                throw new IllegalArgumentException("Trainer is busy at this time");
-            }
-
-            String visitorsGym = visitorRepository.findById(trainingSessionDTO.getVisitorId()).getSubscription().getGym().getName();
-            if (findGym(visitorsGym, trainingSessionDTO)) {
-                trainingSessionDTO.setTrainerId(trainer.getId());
-                TrainingSession trainingSession = new TrainingSession(visitorRepository.findById(trainingSessionDTO.getVisitorId()),
-                        trainerRepository.findById(trainingSessionDTO.getTrainerId()),
-                        trainingSessionDTO.getTrainingTime(),
-                        trainingSessionDTO.getTrainingDate());
-                trainingSessionRepository.save(trainingSession);
-
-                visitorRepository.findById(trainingSessionDTO.getVisitorId()).addTrainingSession(trainingSession);
-                Visitor visitor = visitorRepository.findById(trainingSession.getVisitor().getId());
-                visitorRepository.update(visitor);
-
-                trainer.addTrainingSession(trainingSession);
-                trainerRepository.update(trainer);
-            } else {
-                throw new IllegalArgumentException("Trainer does not work in your gym");
-            }
-
+            throw new IllegalArgumentException("Trainer does not work in your gym");
         }
     }
 
-    public Boolean findGym(String visitorsGym, TrainingSessionDTO trainingSessionDTO) {
-        Set<Contract> contracts = trainerRepository.findById(trainingSessionDTO.getTrainerId()).getContracts();
+    public Boolean findGym(String visitorsGym, Trainer trainer, TrainingSessionDTO trainingSessionDTO) {
+        Set<Contract> contracts = trainer.getContracts();
         for (Contract contract : contracts) {
             if (contract.getGym().getName().equals(visitorsGym)) {
                 return true;

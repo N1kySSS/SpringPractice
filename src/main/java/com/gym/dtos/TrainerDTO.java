@@ -1,7 +1,5 @@
 package com.gym.dtos;
 
-import com.gym.entities.Contract;
-import com.gym.entities.TrainingSession;
 import com.gym.entities.enums.TrainerSpecialization;
 
 import java.util.Set;
@@ -13,10 +11,10 @@ public class TrainerDTO {
     private TrainerSpecialization specialization;
     private String phoneNumber;
     private int experience;
-    private Set<TrainingSession> trainingSessions;
-    private Set<Contract> contracts;
+    private Set<TrainingSessionDTO> trainingSessions;
+    private Set<ContractDTO> contracts;
 
-    public TrainerDTO(Long id, String firstName, String lastName, TrainerSpecialization specialization, String phoneNumber, int experience, Set<TrainingSession> trainingSessions, Set<Contract> contracts) {
+    public TrainerDTO(Long id, String firstName, String lastName, TrainerSpecialization specialization, String phoneNumber, int experience, Set<TrainingSessionDTO> trainingSessions, Set<ContractDTO> contracts) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -51,11 +49,11 @@ public class TrainerDTO {
         this.phoneNumber = phoneNumber;
     }
 
-    public Set<TrainingSession> getTrainingSessions() {
+    public Set<TrainingSessionDTO> getTrainingSessions() {
         return trainingSessions;
     }
 
-    public void setTrainingSessions(Set<TrainingSession> trainingSessions) {
+    public void setTrainingSessions(Set<TrainingSessionDTO> trainingSessions) {
         this.trainingSessions = trainingSessions;
     }
 
@@ -83,11 +81,11 @@ public class TrainerDTO {
         this.experience = experience;
     }
 
-    public Set<Contract> getContracts() {
+    public Set<ContractDTO> getContracts() {
         return contracts;
     }
 
-    public void setContracts(Set<Contract> contracts) {
+    public void setContracts(Set<ContractDTO> contracts) {
         this.contracts = contracts;
     }
 }

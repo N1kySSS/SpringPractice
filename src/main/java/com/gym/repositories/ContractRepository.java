@@ -1,11 +1,12 @@
 package com.gym.repositories;
 
 import com.gym.entities.Contract;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-@Component
+@Repository
 public interface ContractRepository {
-    Contract findContractByTrainerId(Long Id);
 
-    void save(Contract contract);
+    Contract getContractByTrainerId(Long trainerId);
+
+    void add(Contract contract);
 }

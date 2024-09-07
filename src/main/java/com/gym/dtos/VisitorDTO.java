@@ -1,8 +1,5 @@
 package com.gym.dtos;
 
-import com.gym.entities.Subscription;
-import com.gym.entities.TrainingSession;
-
 import java.util.Set;
 
 public class VisitorDTO {
@@ -10,18 +7,18 @@ public class VisitorDTO {
     private String firstName;
     private String lastName;
     private String email;
-    private Subscription subscription;
-    private Set<TrainingSession> trainingSessions;
+    private Long subscriptionId;
+    private Set<TrainingSessionDTO> trainingSessions;
 
     protected VisitorDTO() {
     }
 
-    public VisitorDTO(Long id, String firstName, String lastName, String email, Subscription subscription, Set<TrainingSession> trainingSessions) {
+    public VisitorDTO(Long id, String firstName, String lastName, String email, Long subscriptionId, Set<TrainingSessionDTO> trainingSessions) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.subscription = subscription;
+        this.subscriptionId = subscriptionId;
         this.trainingSessions = trainingSessions;
     }
 
@@ -49,19 +46,19 @@ public class VisitorDTO {
         this.email = email;
     }
 
-    public Subscription getSubscription() {
-        return subscription;
+    public Long getSubscriptionId() {
+        return subscriptionId;
     }
 
-    public void setSubscription(Subscription subscription) {
-        this.subscription = subscription;
+    public void setSubscriptionId(Long subscriptionId) {
+        this.subscriptionId = subscriptionId;
     }
 
-    public Set<TrainingSession> getTrainingSessions() {
+    public Set<TrainingSessionDTO> getTrainingSessions() {
         return trainingSessions;
     }
 
-    public void setTrainingSessions(Set<TrainingSession> trainingSessions) {
+    public void setTrainingSessions(Set<TrainingSessionDTO> trainingSessions) {
         this.trainingSessions = trainingSessions;
     }
 

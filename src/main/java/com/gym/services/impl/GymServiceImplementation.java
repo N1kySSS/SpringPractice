@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GymServiceImplementation extends BaseServiceImplementation implements GymService {
+public class GymServiceImplementation implements GymService {
     private final GymRepository gymRepository;
 
     @Autowired
@@ -17,7 +17,7 @@ public class GymServiceImplementation extends BaseServiceImplementation implemen
 
     @Override
     public String getLocationOfTheGym(String gymName) {
-        Gym gym = gymRepository.findGymByName(gymName);
+        Gym gym = gymRepository.findGymByName(gymName);//TODO(проверить работу. Возможно заменить на Optional<Gym>)
         if (gym != null) {
             return gym.getLocation();
         } else {
@@ -31,7 +31,7 @@ public class GymServiceImplementation extends BaseServiceImplementation implemen
         if (gym != null) {
             return gym.getWorkingHours();
         } else {
-            throw new IllegalArgumentException("Gym with this name does not exist");
+            throw new IllegalArgumentException("Gym with this name does not exist");//TODO(проверить работу. Возможно заменить на Optional<Gym>)
 
         }
     }

@@ -1,15 +1,18 @@
 package com.gym.repositories;
 
 import com.gym.entities.Visitor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-@Component
+import java.util.Optional;
+
+@Repository
 public interface VisitorRepository {
+
     Visitor findByEmail(String email);
 
-    Visitor findById(Long id);
+    Optional<Visitor> findById(Long id);
 
-    void save(Visitor visitor);
+    void add(Visitor visitor);
 
     void update(Visitor visitor);
 }

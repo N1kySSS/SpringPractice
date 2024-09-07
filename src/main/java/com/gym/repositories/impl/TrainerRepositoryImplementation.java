@@ -2,70 +2,45 @@ package com.gym.repositories.impl;
 
 import com.gym.entities.Trainer;
 import com.gym.entities.enums.TrainerSpecialization;
+import com.gym.repositories.BaseTrainerRepository;
 import com.gym.repositories.TrainerRepository;
-import jakarta.persistence.TypedQuery;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public class TrainerRepositoryImplementation extends BaseRepository<Trainer, Long> implements TrainerRepository {
+public class TrainerRepositoryImplementation extends DefaultRepository<BaseTrainerRepository> implements TrainerRepository {
 
     @Override
     public List<Trainer> findTrainersByCriteria(int experience, TrainerSpecialization specialization) {
-        String jpql = "SELECT t FROM Trainer t WHERE t.experience >= :experience AND t.specialization = :specialization";
-        TypedQuery<Trainer> query = entityManager.createQuery(jpql, Trainer.class);
-        query.setParameter("specialization", specialization);
-        query.setParameter("experience", experience);
-        return query.getResultList();
+        return defaultRepository.findTrainersByCriteria(experience, specialization);
     }
 
     @Override
     public Trainer findAvailableTrainer(Long trainerId, LocalTime trainingTime, Date trainingDate) {
-        String jpql = "SELECT t " +
-                "FROM Trainer t " +
-                "LEFT JOIN t.trainingSessions ts " +
-                "WHERE t.id = :trainerId " +
-                "AND (ts IS NULL OR (ts.trainingTime != :trainingTime AND ts.trainingDate != :trainingDate))";
-        TypedQuery<Trainer> query = entityManager.createQuery(jpql, Trainer.class);
-        query.setParameter("trainerId", trainerId);
-        query.setParameter("trainingTime", trainingTime);
-        query.setParameter("trainingDate", trainingDate);
-        List<Trainer> resultList = query.getResultList();
-
-        if (resultList.isEmpty()) {
-            return null;
-        } else {
-            return resultList.getFirst();
-        }
+        return defaultRepository.findAvailableTrainer(trainerId, trainingTime, trainingDate);
     }
 
     @Override
     public Trainer findTrainerByPhoneNumber(String phoneNumber) {
-        String jpql = "SELECT t FROM Trainer t WHERE t.phoneNumber = :phoneNumber";
-        TypedQuery<Trainer> query = entityManager.createQuery(jpql, Trainer.class);
-        query.setParameter("phoneNumber", phoneNumber);
-        List<Trainer> resultList = query.getResultList();
-
-        if (resultList.isEmpty()) {
-            return null;
-        } else {
-            return resultList.getFirst();
-        }
+        return defaultRepository.findTrainerByPhoneNumber(phoneNumber);
     }
 
     @Override
-    @Transactional
-    public Trainer findById(Long id) {
-        return super.findById(Trainer.class, id);
+    public Optional<Trainer> findById(Long id) {
+        return defaultRepository.findById(id);
     }
 
     @Override
-    @Transactional
     public void update(Trainer trainer) {
-        entityManager.merge(trainer);
+        defaultRepository.save(trainer);
+    }
+
+    @Override
+    public void add(Trainer trainer) {
+        defaultRepository.save(trainer);
     }
 }
