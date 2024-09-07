@@ -25,32 +25,32 @@ public class AppConfig {
 
     @Bean
     public ContractRepository contractRepository() {
-        return new ContractRepositoryImplementationImplementation();
+        return new ContractRepositoryImplementation();
     }
 
     @Bean
     public GymRepository gymRepository() {
-        return new GymRepositoryImplementationImplementation();
+        return new GymRepositoryImplementation();
     }
 
     @Bean
     public SubscriptionRepository subscriptionRepository() {
-        return new SubscriptionRepositoryImplementationImplementation();
+        return new SubscriptionRepositoryImplementation();
     }
 
     @Bean
     public TrainerRepository trainerRepository() {
-        return new TrainerRepositoryImplementationImplementation();
+        return new TrainerRepositoryImplementation();
     }
 
     @Bean
     public TrainingSessionRepository trainingSessionRepository() {
-        return new TrainingSessionRepositoryImplementationImplementation();
+        return new TrainingSessionRepositoryImplementation();
     }
 
     @Bean
     public VisitorRepository visitorRepository() {
-        return new VisitorRepositoryImplementationImplementation();
+        return new VisitorRepositoryImplementation();
     }
 
     @Bean
