@@ -35,7 +35,6 @@ public class TrainerServiceImplementation implements TrainerService {
     }
 
     @Override
-    @Transactional
     public void addNewTrainer(TrainerDTO trainerDTO) {
         if (trainerRepository.findTrainerByPhoneNumber(trainerDTO.getPhoneNumber()) != null) {
             throw new IllegalArgumentException("Trainer with this phone number already exists");
@@ -46,7 +45,6 @@ public class TrainerServiceImplementation implements TrainerService {
     }
 
     @Override
-    @Transactional
     public void createContract(ContractDTO contractDTO) {
         Optional<Trainer> trainerOptional = trainerRepository.findById(contractDTO.getTrainerId());
         if (trainerOptional.isEmpty()) {
